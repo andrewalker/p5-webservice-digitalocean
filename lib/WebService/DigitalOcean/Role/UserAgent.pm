@@ -6,8 +6,6 @@ use JSON ();
 use DateTime;
 use utf8;
 
-requires 'token';
-
 # VERSION
 
 has ua => (
