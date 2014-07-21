@@ -1,0 +1,7 @@
+=head1 WebService::DigitalOcean
+
+Implements the Perl module for accessing the v2 of the DigitalOcean API.
+
+Currently on a very early stage of development.
+
+Patches welcome!
