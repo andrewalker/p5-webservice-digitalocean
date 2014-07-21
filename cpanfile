@@ -1,4 +1,4 @@
-requires 'perl', '5.10';
+requires 'perl', '5.010';
 requires 'Moo';
 requires 'LWP::UserAgent';
 requires 'JSON';
