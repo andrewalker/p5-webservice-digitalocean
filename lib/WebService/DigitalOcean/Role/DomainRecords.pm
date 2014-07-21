@@ -68,3 +68,11 @@ sub domain_record_delete {
 # domain_record_update
 
 1;
+
+=method domain_record_create
+
+=method domain_record_delete
+
+=method domain_record_get
+
+=method domain_record_list

@@ -59,6 +59,10 @@ tests very soon.
 
 Patches welcome: L<< https://github.com/andrewalker/p5-webservice-digitalocean >>
 
+=attr api_base_url
+
+=attr token
+
 =head1 SEE ALSO
 
 L<DigitalOcean>

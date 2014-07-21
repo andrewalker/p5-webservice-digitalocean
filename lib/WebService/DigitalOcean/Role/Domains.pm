@@ -53,3 +53,11 @@ sub domain_delete {
 }
 
 1;
+
+=method domain_create
+
+=method domain_delete
+
+=method domain_get
+
+=method domain_list

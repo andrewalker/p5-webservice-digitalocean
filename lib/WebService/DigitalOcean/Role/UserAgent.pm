@@ -64,3 +64,5 @@ sub make_request {
 }
 
 1;
+
+=method make_request
