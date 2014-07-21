@@ -22,8 +22,8 @@ sub _build_ua {
         agent => 'WebService::DigitalOcean/' . $version,
     );
 
-    $ua->default_header('Authentication' => 'Bearer ' . $self->token);
-    $ua->default_header('Content-Type' => 'application/json');
+    $ua->default_header('Authorization' => 'Bearer ' . $self->token);
+    $ua->default_header('Content-Type' => 'application/json; charset=utf-8');
 
     return $ua;
 }
@@ -36,7 +36,7 @@ sub make_request {
             $method,
             $self->api_base_url . $uri,
             undef,
-            JSON::encode_json($data)
+            $data ? JSON::encode_json($data) : undef
         )
     );
 
