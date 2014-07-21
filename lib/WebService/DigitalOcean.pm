@@ -54,14 +54,21 @@ __END__
 
 This module implements DigitalOceans new RESTful API.
 
-It's on a very early stage of development, expect new features, better docs and
-tests very soon.
+It's on a very early stage of development, so expect new features, better docs
+and tests very soon.
 
 Patches welcome: L<< https://github.com/andrewalker/p5-webservice-digitalocean >>
 
 =attr api_base_url
 
+A string prepended to all API endpoints. By default, it's
+https://api.digitalocean.com/v2. This can be adjusted to facilitate tests.
+
 =attr token
+
+The authorization token. It can be retrieved by logging into one's DigitalOcean
+account, and generating a personal token here:
+L<< https://cloud.digitalocean.com/settings/applications >>.
 
 =head1 SEE ALSO
 
