@@ -8,7 +8,9 @@ use DateTime;
 use utf8;
 
 with
-    'WebService::DigitalOcean::Role::UserAgent';
+    'WebService::DigitalOcean::Role::UserAgent',
+    'WebService::DigitalOcean::Role::Domains',
+    'WebService::DigitalOcean::Role::DomainRecords';
 
 # VERSION
 
