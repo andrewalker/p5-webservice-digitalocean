@@ -27,3 +27,43 @@ has token => (
 );
 
 1;
+
+__END__
+
+=head1 SYNOPSIS
+
+    use WebService::DigitalOcean;
+
+    my $do = WebService::DigitalOcean->new(
+        token => $TOKEN,
+    );
+
+    my $res = $do->domain_create(
+        name => 'example.com',
+        ip_address => '127.0.0.1',
+    );
+
+    if ($res->{is_success}) {
+        say $res->{content}{domain}{name};
+    }
+    else {
+        say "Could not create domain";
+    }
+
+=head1 DESCRIPTION
+
+This module implements DigitalOceans new RESTful API.
+
+It's on a very early stage of development, expect new features, better docs and
+tests very soon.
+
+Patches welcome: L<< https://github.com/andrewalker/p5-webservice-digitalocean >>
+
+=head1 SEE ALSO
+
+L<DigitalOcean>
+
+=head1 CAVEATS
+
+This is alpha software. The interface is unstable, and may change without
+notice.
