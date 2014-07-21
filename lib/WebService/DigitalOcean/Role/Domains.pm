@@ -18,9 +18,9 @@ sub domain_create {
             ip_address => Str,
         ],
     );
-    my ($self, %opts) = $check->(@_);
+    my ($self, $opts) = $check->(@_);
 
-    return $self->make_request(POST => '/domains', \%opts);
+    return $self->make_request(POST => '/domains', $opts);
 }
 
 sub domain_list {
@@ -36,9 +36,9 @@ sub domain_get {
             domain => Str,
         ],
     );
-    my ($self, %opts) = $check->(@_);
+    my ($self, $opts) = $check->(@_);
 
-    return $self->make_request(GET => "/domains/$opts{domain}");
+    return $self->make_request(GET => "/domains/$opts->{domain}");
 }
 
 sub domain_delete {
@@ -47,9 +47,9 @@ sub domain_delete {
             domain => Str,
         ],
     );
-    my ($self, %opts) = $check->(@_);
+    my ($self, $opts) = $check->(@_);
 
-    return $self->make_request(DELETE => "/domains/$opts{domain}");
+    return $self->make_request(DELETE => "/domains/$opts->{domain}");
 }
 
 1;

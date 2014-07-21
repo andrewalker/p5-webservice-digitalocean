@@ -22,11 +22,11 @@ sub domain_record_create {
             weight   => Optional[Int],
         ],
     );
-    my ($self, %opts) = $check->(@_);
+    my ($self, $opts) = $check->(@_);
 
-    my $domain = delete $opts{domain};
+    my $domain = delete $opts->{domain};
 
-    return $self->make_request(POST => "/domains/$domain/records", \%opts);
+    return $self->make_request(POST => "/domains/$domain/records", $opts);
 }
 
 sub domain_record_list {
@@ -35,9 +35,9 @@ sub domain_record_list {
             domain => Str,
         ],
     );
-    my ($self, %opts) = $check->(@_);
+    my ($self, $opts) = $check->(@_);
 
-    return $self->make_request(GET => "/domains/$opts{domain}/records");
+    return $self->make_request(GET => "/domains/$opts->{domain}/records");
 }
 
 sub domain_record_get {
@@ -47,9 +47,9 @@ sub domain_record_get {
             id     => Int,
         ],
     );
-    my ($self, %opts) = $check->(@_);
+    my ($self, $opts) = $check->(@_);
 
-    return $self->make_request(GET => "/domains/$opts{domain}/records/$opts{id}");
+    return $self->make_request(GET => "/domains/$opts->{domain}/records/$opts->{id}");
 }
 
 sub domain_record_delete {
@@ -59,9 +59,9 @@ sub domain_record_delete {
             id     => Int,
         ],
     );
-    my ($self, %opts) = $check->(@_);
+    my ($self, $opts) = $check->(@_);
 
-    return $self->make_request(DELETE => "/domains/$opts{domain}/records/$opts{id}");
+    return $self->make_request(DELETE => "/domains/$opts->{domain}/records/$opts->{id}");
 }
 
 # TODO:
