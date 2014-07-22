@@ -11,7 +11,8 @@ with
     'WebService::DigitalOcean::Role::UserAgent',
     'WebService::DigitalOcean::Role::Domains',
     'WebService::DigitalOcean::Role::DomainRecords',
-    'WebService::DigitalOcean::Role::Droplets';
+    'WebService::DigitalOcean::Role::Droplets',
+    'WebService::DigitalOcean::Role::Keys';
 
 # VERSION
 
