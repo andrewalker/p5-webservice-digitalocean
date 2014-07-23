@@ -86,15 +86,19 @@ L<< https://developers.digitalocean.com >>: Documentation for API v2, in Digital
 
 =item *
 
-L<< Droplets role| WebService::DigitalOcean::Role::Droplets >>: Manage droplets with this module.
+L<< Droplets role|WebService::DigitalOcean::Role::Droplets >>: Manage droplets with this module.
 
 =item *
 
-L<< Domains role| WebService::DigitalOcean::Role::Domains >>: Manage domains with this module.
+L<< Domains role|WebService::DigitalOcean::Role::Domains >>: Manage domains with this module.
 
 =item *
 
-L<< Domain Records role| WebService::DigitalOcean::Role::DomainRecords >>: Manage domain records with this module.
+L<< Domain Records role|WebService::DigitalOcean::Role::DomainRecords >>: Manage domain records with this module.
+
+=item *
+
+L<< Keys role|WebService::DigitalOcean::Role::Keys >>: Manage SSH Keys with this module.
 
 =back
 
