@@ -54,17 +54,17 @@ sub domain_delete {
 
 1;
 
-=method domain_create
+=method $do->domain_create(%args)
 
 =head3 Arguments
 
 =over
 
-=item Str name
+=item C<Str> name
 
 The domain name.
 
-=item Str ip_address
+=item C<Str> ip_address
 
 The IP address the domain will point to.
 
@@ -77,13 +77,13 @@ Creates a new domain name.
         ip_address => '12.34.56.78',
     );
 
-=method domain_delete
+=method $do->domain_delete(%args)
 
 =head3 Arguments
 
 =over
 
-=item Str domain
+=item C<Str> domain
 
 The domain name.
 
@@ -95,13 +95,13 @@ Deletes the specified domain.
         domain => 'example.com',
     );
 
-=method domain_get
+=method $do->domain_get(%args)
 
 =head3 Arguments
 
 =over
 
-=item Str domain
+=item C<Str> domain
 
 The domain name.
 
@@ -113,7 +113,7 @@ Retrieves the specified domain.
         domain => 'example.com',
     );
 
-=method domain_list
+=method $do->domain_list(%args)
 
 Lists all domains for this account.
 

@@ -60,15 +60,15 @@ sub key_delete {
 
 1;
 
-=method key_create
+=method $do->key_create(%args)
 
 =head3 Arguments
 
 =over
 
-=item Str name
+=item C<Str> name
 
-=item Str public_key
+=item C<Str> public_key
 
 =back
 
@@ -79,15 +79,15 @@ Creates a new ssh key for this account.
         public_key => <$public_key_fh>,
     );
 
-=method key_delete
+=method $do->key_delete(%args)
 
 =head3 Arguments
 
 =over
 
-=item Int id
+=item C<Int> id
 
-=item Str fingerprint
+=item C<Str> fingerprint
 
 =back
 
@@ -97,15 +97,15 @@ Deletes the specified ssh key.
         id => 146432
     );
 
-=method key_get
+=method $do->key_get(%args)
 
 =head3 Arguments
 
 =over
 
-=item Int id
+=item C<Int> id
 
-=item Str fingerprint
+=item C<Str> fingerprint
 
 =back
 
@@ -115,6 +115,6 @@ Retrieves details about a particular ssh key, identified by id or fingerprint (p
         id => 1215,
     );
 
-=method key_list
+=method $do->key_list()
 
 Retrieves all the keys for this account.

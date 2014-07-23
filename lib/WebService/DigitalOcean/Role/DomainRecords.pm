@@ -70,37 +70,37 @@ sub domain_record_delete {
 
 1;
 
-=method domain_record_create
+=method $do->domain_record_create(%args)
 
 =head3 Arguments
 
 =over
 
-=item Str domain
+=item C<Str> domain
 
 The domain under which the record will be created.
 
-=item Str type
+=item C<Str> type
 
 The type of the record (eg MX, CNAME, A, etc).
 
-=item Optional[Str] name
+=item C<Str> name (optional)
 
 The name of the record.
 
-=item Optional[Str] data
+=item C<Str> data (optional)
 
 The data (such as the IP address) of the record.
 
-=item Optional[Int] priority
+=item C<Int> priority (optional)
 
 Priority, for MX or SRV records.
 
-=item Optional[Int] port
+=item C<Int> port (optional)
 
 The port, for SRV records.
 
-=item Optional[Int] weight
+=item C<Int> weight (optional)
 
 The weight, for SRV records.
 
@@ -117,17 +117,17 @@ Creates a new record for a domain.
 
     my $id = $response->{content}{domain_record}{id};
 
-=method domain_record_delete
+=method $do->domain_record_delete(%args)
 
 =head3 Arguments
 
 =over
 
-=item Str domain
+=item C<Str> domain
 
 The domain to which the record belongs.
 
-=item Int id
+=item C<Int> id
 
 The id of the record.
 
@@ -140,17 +140,17 @@ Deletes the specified record.
         id     => 1215,
     );
 
-=method domain_record_get
+=method $do->domain_record_get(%args)
 
 =head3 Arguments
 
 =over
 
-=item Str domain
+=item C<Str> domain
 
 The domain to which the record belongs.
 
-=item Int id
+=item C<Int> id
 
 The id of the record.
 
@@ -165,13 +165,13 @@ Retrieves details about a particular record, identified by id.
 
     my $ip = $response->{content}{domain_record}{data};
 
-=method domain_record_list
+=method $do->domain_record_list(%args)
 
 =head3 Arguments
 
 =over
 
-=item Str domain
+=item C<Str> domain
 
 The domain to which the records belong.
 

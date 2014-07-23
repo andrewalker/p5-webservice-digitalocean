@@ -60,27 +60,27 @@ sub droplet_delete {
 
 1;
 
-=method droplet_create
+=method $do->droplet_create(%args)
 
 =head3 Arguments
 
 =over
 
-=item Str name
+=item C<Str> name
 
-=item Str region
+=item C<Str> region
 
-=item Str size
+=item C<Str> size
 
-=item Str image
+=item C<Str> image
 
-=item Optional[ ArrayRef ] ssh_keys
+=item C<ArrayRef> ssh_keys (optional)
 
-=item Optional[ Bool ] backups
+=item C<Bool> backups (optional)
 
-=item Optional[ Bool ] ipv6
+=item C<Bool> ipv6 (optional)
 
-=item Optional[ Bool ] private_networking
+=item C<Bool> private_networking (optional)
 
 =back
 
@@ -97,13 +97,13 @@ Creates a new droplet.
         private_networking => 0,
     );
 
-=method droplet_delete
+=method $do->droplet_delete(%args)
 
 =head3 Arguments
 
 =over
 
-=item Int id
+=item C<Int> id
 
 =back
 
@@ -113,13 +113,13 @@ Deletes the specified droplet.
         id => 1250928,
     );
 
-=method droplet_get
+=method $do->droplet_get(%args)
 
 =head3 Arguments
 
 =over
 
-=item Int id
+=item C<Int> id
 
 =back
 
@@ -129,7 +129,7 @@ Retrieves the specified droplet.
         droplet => 15314123,
     );
 
-=method droplet_list
+=method $do->droplet_list()
 
 Lists all droplets for this account.
 
