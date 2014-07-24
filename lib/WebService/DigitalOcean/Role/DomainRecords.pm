@@ -70,6 +70,12 @@ sub domain_record_delete {
 
 1;
 
+=head2 DESCRIPTION
+
+Implements the domain records resource.
+
+More info: L<< https://developers.digitalocean.com/#domain-records >>.
+
 =method $do->domain_record_create(%args)
 
 =head3 Arguments
@@ -117,6 +123,8 @@ Creates a new record for a domain.
 
     my $id = $response->{content}{domain_record}{id};
 
+More info: L<< https://developers.digitalocean.com/#create-a-new-domain-record >>.
+
 =method $do->domain_record_delete(%args)
 
 =head3 Arguments
@@ -139,6 +147,8 @@ Deletes the specified record.
         domain => 'example.com',
         id     => 1215,
     );
+
+More info: L<< https://developers.digitalocean.com/#delete-a-domain-record >>.
 
 =method $do->domain_record_get(%args)
 
@@ -165,6 +175,8 @@ Retrieves details about a particular record, identified by id.
 
     my $ip = $response->{content}{domain_record}{data};
 
+More info: L<< https://developers.digitalocean.com/#retrieve-an-existing-domain-record >>.
+
 =method $do->domain_record_list(%args)
 
 =head3 Arguments
@@ -186,3 +198,5 @@ Retrieves all the records for a particular domain.
     for (@{ $response->{content}{domain_records} }) {
         print "$_->{name} => $_->{data}\n";
     }
+
+More info: L<< https://developers.digitalocean.com/#list-all-domain-records >>.

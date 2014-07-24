@@ -60,6 +60,12 @@ sub key_delete {
 
 1;
 
+=head2 DESCRIPTION
+
+Implements the SSH Keys resource.
+
+More info: L<< https://developers.digitalocean.com/#keys >>.
+
 =method $do->key_create(%args)
 
 =head3 Arguments
@@ -79,6 +85,8 @@ Creates a new ssh key for this account.
         public_key => <$public_key_fh>,
     );
 
+More info: L<< https://developers.digitalocean.com/#create-a-new-key >>.
+
 =method $do->key_delete(%args)
 
 =head3 Arguments
@@ -96,6 +104,8 @@ Deletes the specified ssh key.
     $do->key_delete(
         id => 146432
     );
+
+More info: L<< https://developers.digitalocean.com/#destroy-a-key >>.
 
 =method $do->key_get(%args)
 
@@ -115,6 +125,10 @@ Retrieves details about a particular ssh key, identified by id or fingerprint (p
         id => 1215,
     );
 
+More info: L<< https://developers.digitalocean.com/#retrieve-an-existing-key >>.
+
 =method $do->key_list()
 
 Retrieves all the keys for this account.
+
+More info: L<< https://developers.digitalocean.com/#list-all-keys >>.

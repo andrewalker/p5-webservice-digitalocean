@@ -60,6 +60,12 @@ sub droplet_delete {
 
 1;
 
+=head2 DESCRIPTION
+
+Implements the droplets resource.
+
+More info: L<< https://developers.digitalocean.com/#droplets >>.
+
 =method $do->droplet_create(%args)
 
 =head3 Arguments
@@ -97,6 +103,8 @@ Creates a new droplet.
         private_networking => 0,
     );
 
+More info: L<< https://developers.digitalocean.com/#create-a-new-droplet >>.
+
 =method $do->droplet_delete(%args)
 
 =head3 Arguments
@@ -112,6 +120,8 @@ Deletes the specified droplet.
     $do->droplet_delete(
         id => 1250928,
     );
+
+More info: L<< https://developers.digitalocean.com/#delete-a-droplet >>.
 
 =method $do->droplet_get(%args)
 
@@ -129,6 +139,8 @@ Retrieves the specified droplet.
         droplet => 15314123,
     );
 
+More info: L<< https://developers.digitalocean.com/#retrieve-an-existing-droplet-by-id >>.
+
 =method $do->droplet_list()
 
 Lists all droplets for this account.
@@ -138,3 +150,5 @@ Lists all droplets for this account.
     for (@{ $response->{content}{droplets} }) {
         print $_->{id};
     }
+
+More info: L<< https://developers.digitalocean.com/#list-all-droplets >>.

@@ -54,6 +54,12 @@ sub domain_delete {
 
 1;
 
+=head2 DESCRIPTION
+
+Implements the domain resource.
+
+More info: L<< https://developers.digitalocean.com/#domains >>.
+
 =method $do->domain_create(%args)
 
 =head3 Arguments
@@ -77,6 +83,8 @@ Creates a new domain name.
         ip_address => '12.34.56.78',
     );
 
+More info: L<< https://developers.digitalocean.com/#create-a-new-domain >>.
+
 =method $do->domain_delete(%args)
 
 =head3 Arguments
@@ -94,6 +102,8 @@ Deletes the specified domain.
     $do->domain_delete(
         domain => 'example.com',
     );
+
+More info: L<< https://developers.digitalocean.com/#delete-a-domain >>.
 
 =method $do->domain_get(%args)
 
@@ -113,6 +123,8 @@ Retrieves the specified domain.
         domain => 'example.com',
     );
 
+More info: L<< https://developers.digitalocean.com/#retrieve-an-existing-domain >>.
+
 =method $do->domain_list(%args)
 
 Lists all domains for this account.
@@ -122,3 +134,5 @@ Lists all domains for this account.
     for (@{ $response->{content}{domains} }) {
         print $_->{id};
     }
+
+More info: L<< https://developers.digitalocean.com/#list-all-domains >>.
