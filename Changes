@@ -1,6 +1,8 @@
 Revision history for Perl module WebService::DigitalOcean.
 
 {{$NEXT}}
+
+0.003 2014-07-24T13:43:37Z
     - Improve documentation
 
 0.002 2014-07-22T17:57:10Z
