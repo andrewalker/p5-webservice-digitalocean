@@ -1,6 +1,11 @@
 Revision history for Perl module WebService::DigitalOcean.
 
 {{$NEXT}}
+    - BACK INCOMPAT: Rework entire API to use hashrefs arguments, instead of
+      hashes
+    - Documentation improvements
+    - Remove PWP::Encoding author dep
+    - Create DropletAction role
 
 0.003 2014-07-24T13:43:37Z
     - Improve documentation
