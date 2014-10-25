@@ -13,7 +13,9 @@ with
     'WebService::DigitalOcean::Role::DomainRecords',
     'WebService::DigitalOcean::Role::Droplets',
     'WebService::DigitalOcean::Role::DropletActions',
-    'WebService::DigitalOcean::Role::Keys';
+    'WebService::DigitalOcean::Role::Keys',
+    'WebService::DigitalOcean::Role::Regions',
+    'WebService::DigitalOcean::Role::Sizes';
 
 # VERSION
 
@@ -104,6 +106,14 @@ L<< Domain Records role|WebService::DigitalOcean::Role::DomainRecords >>: Manage
 =item *
 
 L<< Keys role|WebService::DigitalOcean::Role::Keys >>: Manage SSH Keys with this module.
+
+=item *
+
+L<< Regions role|WebService::DigitalOcean::Role::Regions >>: Lists regions with this module.
+
+=item *
+
+L<< Sizes role|WebService::DigitalOcean::Role::Sizes >>: Lists sizes with this module.
 
 =back
 
