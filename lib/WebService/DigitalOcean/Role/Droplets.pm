@@ -3,7 +3,7 @@ package WebService::DigitalOcean::Role::Droplets;
 use utf8;
 use Moo::Role;
 use feature 'state';
-use Types::Standard qw/Str Object slurpy Dict ArrayRef Optional Bool Int/;
+use Types::Standard qw/Str Object Dict ArrayRef Optional Bool Int/;
 use Type::Utils;
 use Type::Params qw/compile/;
 
@@ -13,7 +13,7 @@ requires 'make_request';
 
 sub droplet_create {
     state $check = compile(Object,
-        slurpy Dict[
+        Dict[
             name               => Str,
             region             => Str,
             size               => Str,
@@ -37,25 +37,17 @@ sub droplet_list {
 }
 
 sub droplet_get {
-    state $check = compile(Object,
-        slurpy Dict[
-            id => Int,
-        ],
-    );
-    my ($self, $opts) = $check->(@_);
+    state $check = compile(Object, Int);
+    my ($self, $id) = $check->(@_);
 
-    return $self->make_request(GET => "/droplets/$opts->{id}");
+    return $self->make_request(GET => "/droplets/$id");
 }
 
 sub droplet_delete {
-    state $check = compile(Object,
-        slurpy Dict[
-            id => Str,
-        ],
-    );
-    my ($self, $opts) = $check->(@_);
+    state $check = compile(Object, Int);
+    my ($self, $id) = $check->(@_);
 
-    return $self->make_request(DELETE => "/droplets/$opts->{id}");
+    return $self->make_request(DELETE => "/droplets/$id");
 }
 
 1;
@@ -66,27 +58,27 @@ Implements the droplets resource.
 
 More info: L<< https://developers.digitalocean.com/#droplets >>.
 
-=method $do->droplet_create(%args)
+=method $do->droplet_create(\%args)
 
 =head3 Arguments
 
 =over
 
-=item C<Str> name
+=item C<Str> $args{name}
 
-=item C<Str> region
+=item C<Str> $args{region}
 
-=item C<Str> size
+=item C<Str> $args{size}
 
-=item C<Str> image
+=item C<Str> $args{image}
 
-=item C<ArrayRef> ssh_keys (optional)
+=item C<ArrayRef> $args{ssh_keys} (optional)
 
-=item C<Bool> backups (optional)
+=item C<Bool> $args{backups} (optional)
 
-=item C<Bool> ipv6 (optional)
+=item C<Bool> $args{ipv6} (optional)
 
-=item C<Bool> private_networking (optional)
+=item C<Bool> $args{private_networking} (optional)
 
 =back
 
@@ -105,39 +97,35 @@ Creates a new droplet.
 
 More info: L<< https://developers.digitalocean.com/#create-a-new-droplet >>.
 
-=method $do->droplet_delete(%args)
+=method $do->droplet_delete($id)
 
 =head3 Arguments
 
 =over
 
-=item C<Int> id
+=item C<Int> $id
 
 =back
 
 Deletes the specified droplet.
 
-    $do->droplet_delete(
-        id => 1250928,
-    );
+    $do->droplet_delete(1250928);
 
 More info: L<< https://developers.digitalocean.com/#delete-a-droplet >>.
 
-=method $do->droplet_get(%args)
+=method $do->droplet_get($id)
 
 =head3 Arguments
 
 =over
 
-=item C<Int> id
+=item C<Int> $id
 
 =back
 
 Retrieves the specified droplet.
 
-    my $response = $do->droplet_get(
-        droplet => 15314123,
-    );
+    my $response = $do->droplet_get(15314123);
 
 More info: L<< https://developers.digitalocean.com/#retrieve-an-existing-droplet-by-id >>.
 

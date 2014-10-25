@@ -3,7 +3,7 @@ package WebService::DigitalOcean::Role::DomainRecords;
 use utf8;
 use Moo::Role;
 use feature 'state';
-use Types::Standard qw/Str Int Object slurpy Dict Optional/;
+use Types::Standard qw/Str Int Object Dict Optional/;
 use Type::Utils;
 use Type::Params qw/compile/;
 
@@ -13,7 +13,7 @@ requires 'make_request';
 
 sub domain_record_create {
     state $check = compile(Object,
-        slurpy Dict[
+        Dict[
             domain   => Str,
             type     => Str,
             name     => Optional[Str],
@@ -31,19 +31,15 @@ sub domain_record_create {
 }
 
 sub domain_record_list {
-    state $check = compile(Object,
-        slurpy Dict[
-            domain => Str,
-        ],
-    );
+    state $check = compile(Object, Str);
     my ($self, $opts) = $check->(@_);
 
-    return $self->make_request(GET => "/domains/$opts->{domain}/records");
+    return $self->make_request(GET => "/domains/$domain/records");
 }
 
 sub domain_record_get {
     state $check = compile(Object,
-        slurpy Dict[
+        Dict[
             domain => Str,
             id     => Int,
         ],
@@ -55,7 +51,7 @@ sub domain_record_get {
 
 sub domain_record_delete {
     state $check = compile(Object,
-        slurpy Dict[
+        Dict[
             domain => Str,
             id     => Int,
         ],
@@ -76,37 +72,37 @@ Implements the domain records resource.
 
 More info: L<< https://developers.digitalocean.com/#domain-records >>.
 
-=method $do->domain_record_create(%args)
+=method $do->domain_record_create(\%args)
 
 =head3 Arguments
 
 =over
 
-=item C<Str> domain
+=item C<Str> $args{domain}
 
 The domain under which the record will be created.
 
-=item C<Str> type
+=item C<Str> $args{type}
 
 The type of the record (eg MX, CNAME, A, etc).
 
-=item C<Str> name (optional)
+=item C<Str> $args{name} (optional)
 
 The name of the record.
 
-=item C<Str> data (optional)
+=item C<Str> $args{data} (optional)
 
 The data (such as the IP address) of the record.
 
-=item C<Int> priority (optional)
+=item C<Int> $args{priority} (optional)
 
 Priority, for MX or SRV records.
 
-=item C<Int> port (optional)
+=item C<Int> $args{port} (optional)
 
 The port, for SRV records.
 
-=item C<Int> weight (optional)
+=item C<Int> $args{weight} (optional)
 
 The weight, for SRV records.
 
@@ -114,28 +110,28 @@ The weight, for SRV records.
 
 Creates a new record for a domain.
 
-    my $response = $do->domain_record_create(
+    my $response = $do->domain_record_create({
         domain => 'example.com',
         type   => 'A',
         name   => 'www2',
         data   => '12.34.56.78',
-    );
+    });
 
     my $id = $response->{content}{domain_record}{id};
 
 More info: L<< https://developers.digitalocean.com/#create-a-new-domain-record >>.
 
-=method $do->domain_record_delete(%args)
+=method $do->domain_record_delete(\%args)
 
 =head3 Arguments
 
 =over
 
-=item C<Str> domain
+=item C<Str> $args{domain}
 
 The domain to which the record belongs.
 
-=item C<Int> id
+=item C<Int> $args{id}
 
 The id of the record.
 
@@ -143,24 +139,24 @@ The id of the record.
 
 Deletes the specified record.
 
-    $do->domain_record_delete(
+    $do->domain_record_delete({
         domain => 'example.com',
         id     => 1215,
-    );
+    });
 
 More info: L<< https://developers.digitalocean.com/#delete-a-domain-record >>.
 
-=method $do->domain_record_get(%args)
+=method $do->domain_record_get(\%args)
 
 =head3 Arguments
 
 =over
 
-=item C<Str> domain
+=item C<Str> $args{domain}
 
 The domain to which the record belongs.
 
-=item C<Int> id
+=item C<Int> $args{id}
 
 The id of the record.
 
@@ -168,22 +164,22 @@ The id of the record.
 
 Retrieves details about a particular record, identified by id.
 
-    my $response = $do->domain_record_get(
+    my $response = $do->domain_record_get({
         domain => 'example.com',
         id     => 1215,
-    );
+    });
 
     my $ip = $response->{content}{domain_record}{data};
 
 More info: L<< https://developers.digitalocean.com/#retrieve-an-existing-domain-record >>.
 
-=method $do->domain_record_list(%args)
+=method $do->domain_record_list($domain)
 
 =head3 Arguments
 
 =over
 
-=item C<Str> domain
+=item C<Str> $domain
 
 The domain to which the records belong.
 
@@ -191,9 +187,7 @@ The domain to which the records belong.
 
 Retrieves all the records for a particular domain.
 
-    my $response = $do->domain_record_list(
-        domain => 'example.com',
-    );
+    my $response = $do->domain_record_list('example.com');
 
     for (@{ $response->{content}{domain_records} }) {
         print "$_->{name} => $_->{data}\n";
