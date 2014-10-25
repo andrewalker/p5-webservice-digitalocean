@@ -62,9 +62,18 @@ my @droplet_methods = qw/
   droplet_delete
 /;
 
+my @region_methods = qw/
+  region_list
+/;
+
+my @size_methods = qw/
+  size_list
+/;
+
 for (
-    @domain_record_methods, @domain_methods, @droplet_action_methods,
-    @key_methods,           @droplet_methods
+    @domain_record_methods, @domain_methods,  @droplet_action_methods,
+    @key_methods,           @droplet_methods, @region_methods,
+    @size_methods,
   )
 {
     ok( $do->can($_), '$do can ' . $_ );
