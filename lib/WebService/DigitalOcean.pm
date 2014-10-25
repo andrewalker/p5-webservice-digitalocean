@@ -12,6 +12,7 @@ with
     'WebService::DigitalOcean::Role::Domains',
     'WebService::DigitalOcean::Role::DomainRecords',
     'WebService::DigitalOcean::Role::Droplets',
+    'WebService::DigitalOcean::Role::DropletActions',
     'WebService::DigitalOcean::Role::Keys';
 
 # VERSION
@@ -87,6 +88,10 @@ L<< https://developers.digitalocean.com >>: Documentation for API v2, in Digital
 =item *
 
 L<< Droplets role|WebService::DigitalOcean::Role::Droplets >>: Manage droplets with this module.
+
+=item *
+
+L<< Droplet Actions role|WebService::DigitalOcean::Role::DropletActions >>: Execute actions in droplets with this module.
 
 =item *
 
