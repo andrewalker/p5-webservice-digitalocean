@@ -5,7 +5,7 @@ Revision history for Perl module WebService::DigitalOcean.
       hashes
     - Documentation improvements
     - Remove PWP::Encoding author dep
-    - Create DropletAction role
+    - Create DropletActions, Sizes and Regions role
 
 0.003 2014-07-24T13:43:37Z
     - Improve documentation
