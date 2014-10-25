@@ -130,9 +130,9 @@ Makes requests to the DigitalOcean, and parses the response.
 All requests made from other methods use L</make_request> to make them.
 
     my $res = $self->make_request(POST => '/domains', {
-        name => 'example.com',
-        ip_address => '12.34.56.78'
-    );
+        name       => 'example.com',
+        ip_address => '12.34.56.78',
+    });
 
 B<Note:> this is how L<WebService::DigitalOcean::Role::Domains/domain_create>
 is implemented. You shouldn't use this method directly in your application
