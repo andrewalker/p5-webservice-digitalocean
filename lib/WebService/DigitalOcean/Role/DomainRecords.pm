@@ -32,7 +32,7 @@ sub domain_record_create {
 
 sub domain_record_list {
     state $check = compile(Object, Str);
-    my ($self, $opts) = $check->(@_);
+    my ($self, $domain) = $check->(@_);
 
     return $self->make_request(GET => "/domains/$domain/records");
 }
