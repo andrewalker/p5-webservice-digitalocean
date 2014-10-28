@@ -1,6 +1,9 @@
 Revision history for Perl module WebService::DigitalOcean.
 
 {{$NEXT}}
+    - Fix variable scope, which broke random systems
+
+0.010 2014-10-25T20:07:57Z
     - BACK INCOMPAT: Rework entire API to use hashrefs arguments, instead of
       hashes
     - Documentation improvements
