@@ -47,7 +47,7 @@ __END__
     });
 
     if ($res->{is_success}) {
-        say $res->{content}{domain}{name};
+        say $res->{content}{name};
     }
     else {
         say "Could not create domain";
@@ -142,7 +142,7 @@ Lists all domains for this account.
 
     my $response = $do->domain_list();
 
-    for (@{ $response->{content}{domains} }) {
+    for (@{ $response->{content} }) {
         print $_->{id};
     }
 
@@ -193,7 +193,7 @@ Creates a new record for a domain.
         data   => '12.34.56.78',
     });
 
-    my $id = $response->{content}{domain_record}{id};
+    my $id = $response->{content}{id};
 
 More info: L<< https://developers.digitalocean.com/#create-a-new-domain-record >>.
 
@@ -245,7 +245,7 @@ Retrieves details about a particular record, identified by id.
         id     => 1215,
     });
 
-    my $ip = $response->{content}{domain_record}{data};
+    my $ip = $response->{content}{data};
 
 More info: L<< https://developers.digitalocean.com/#retrieve-an-existing-domain-record >>.
 
@@ -265,7 +265,7 @@ Retrieves all the records for a particular domain.
 
     my $response = $do->domain_record_list('example.com');
 
-    for (@{ $response->{content}{domain_records} }) {
+    for (@{ $response->{content} }) {
         print "$_->{name} => $_->{data}\n";
     }
 
@@ -348,7 +348,7 @@ Lists all droplets for this account.
 
     my $response = $do->droplet_list();
 
-    for (@{ $response->{content}{droplets} }) {
+    for (@{ $response->{content} }) {
         print $_->{id};
     }
 
@@ -714,7 +714,7 @@ Retrieves all the regions available in Digital Ocean.
 
     my $regions = $do->region_list();
 
-    for my $r (@{ $regions->{content}{regions} }) {
+    for my $r (@{ $regions->{content} }) {
         if ($r->{available}) {
             say "$r->{name} is available";
         }
@@ -728,7 +728,7 @@ Retrieves all the sizes available in Digital Ocean.
 
     my $sizes = $do->size_list();
 
-    for my $s (@{ $sizes->{content}{sizes} }) {
+    for my $s (@{ $sizes->{content} }) {
         say "Size $s->{slug} costs $s->{price_hourly} per hour.";
     }
 

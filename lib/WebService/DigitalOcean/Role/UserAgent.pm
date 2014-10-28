@@ -4,6 +4,7 @@ use Moo::Role;
 use LWP::UserAgent;
 use JSON ();
 use DateTime;
+use Types::Standard qw/is_HashRef/;
 use utf8;
 
 # VERSION
@@ -47,7 +48,15 @@ sub make_request {
     };
 
     if ($response->content_type eq 'application/json') {
-        $result->{content} = JSON::decode_json($response->decoded_content);
+        my $decoded_response = JSON::decode_json($response->decoded_content);
+
+        if (is_HashRef($decoded_response) && keys(%$decoded_response) == 1) {
+            my @key = keys %$decoded_response;
+            $result->{content} = delete $decoded_response->{$key[0]};
+        }
+        else {
+            $result->{content} = $decoded_response;
+        }
     }
 
     if (my $ratelimit = $response->header('RateLimit-Limit')) {
