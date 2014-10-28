@@ -1,6 +1,8 @@
 Revision history for Perl module WebService::DigitalOcean.
 
 {{$NEXT}}
+
+0.011 2014-10-28T16:39:08Z
     - Fix variable scope, which broke random systems
 
 0.010 2014-10-25T20:07:57Z
