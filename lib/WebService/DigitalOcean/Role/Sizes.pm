@@ -20,7 +20,7 @@ sub size_list {
 
 1;
 
-=head2 DESCRIPTION
+=head1 DESCRIPTION
 
 Implements the Sizes resource.
 

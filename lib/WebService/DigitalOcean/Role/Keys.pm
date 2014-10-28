@@ -60,7 +60,7 @@ sub key_delete {
 
 1;
 
-=head2 DESCRIPTION
+=head1 DESCRIPTION
 
 Implements the SSH Keys resource.
 

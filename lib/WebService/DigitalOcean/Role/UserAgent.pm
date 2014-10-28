@@ -65,7 +65,7 @@ sub make_request {
 
 1;
 
-=head2 DESCRIPTION
+=head1 DESCRIPTION
 
 Role used to make requests to the DigitalOcean API, and to format their response.
 
