@@ -101,87 +101,89 @@ sub droplet_snapshot {
     return $self->_droplet_action_start($opts);
 }
 
-state $Check_Self_and_ID = compile( Object, Int );
+{
+    my $Check_Self_and_ID = compile( Object, Int );
 
-sub droplet_reboot {
-    my ($self, $id) = $Check_Self_and_ID->(@_);
+    sub droplet_reboot {
+        my ($self, $id) = $Check_Self_and_ID->(@_);
 
-    return $self->_droplet_action_start({
-        droplet => $id,
-        action  => 'reboot',
-    });
-}
+        return $self->_droplet_action_start({
+            droplet => $id,
+            action  => 'reboot',
+        });
+    }
 
-sub droplet_power_cycle {
-    my ($self, $id) = $Check_Self_and_ID->(@_);
+    sub droplet_power_cycle {
+        my ($self, $id) = $Check_Self_and_ID->(@_);
 
-    return $self->_droplet_action_start({
-        droplet => $id,
-        action  => 'power_cycle',
-    });
-}
+        return $self->_droplet_action_start({
+            droplet => $id,
+            action  => 'power_cycle',
+        });
+    }
 
-sub droplet_power_on {
-    my ($self, $id) = $Check_Self_and_ID->(@_);
+    sub droplet_power_on {
+        my ($self, $id) = $Check_Self_and_ID->(@_);
 
-    return $self->_droplet_action_start({
-        droplet => $id,
-        action  => 'power_on',
-    });
-}
+        return $self->_droplet_action_start({
+            droplet => $id,
+            action  => 'power_on',
+        });
+    }
 
-sub droplet_power_off {
-    my ($self, $id) = $Check_Self_and_ID->(@_);
+    sub droplet_power_off {
+        my ($self, $id) = $Check_Self_and_ID->(@_);
 
-    return $self->_droplet_action_start({
-        droplet => $id,
-        action  => 'power_off',
-    });
-}
+        return $self->_droplet_action_start({
+            droplet => $id,
+            action  => 'power_off',
+        });
+    }
 
-sub droplet_password_reset {
-    my ($self, $id) = $Check_Self_and_ID->(@_);
+    sub droplet_password_reset {
+        my ($self, $id) = $Check_Self_and_ID->(@_);
 
-    return $self->_droplet_action_start({
-        droplet => $id,
-        action  => 'password_reset',
-    });
-}
+        return $self->_droplet_action_start({
+            droplet => $id,
+            action  => 'password_reset',
+        });
+    }
 
-sub droplet_shutdown {
-    my ($self, $id) = $Check_Self_and_ID->(@_);
+    sub droplet_shutdown {
+        my ($self, $id) = $Check_Self_and_ID->(@_);
 
-    return $self->_droplet_action_start({
-        droplet => $id,
-        action  => 'shutdown',
-    });
-}
+        return $self->_droplet_action_start({
+            droplet => $id,
+            action  => 'shutdown',
+        });
+    }
 
-sub droplet_enable_ipv6 {
-    my ($self, $id) = $Check_Self_and_ID->(@_);
+    sub droplet_enable_ipv6 {
+        my ($self, $id) = $Check_Self_and_ID->(@_);
 
-    return $self->_droplet_action_start({
-        droplet => $id,
-        action  => 'enable_ipv6',
-    });
-}
+        return $self->_droplet_action_start({
+            droplet => $id,
+            action  => 'enable_ipv6',
+        });
+    }
 
-sub droplet_enable_private_networking {
-    my ($self, $id) = $Check_Self_and_ID->(@_);
+    sub droplet_enable_private_networking {
+        my ($self, $id) = $Check_Self_and_ID->(@_);
 
-    return $self->_droplet_action_start({
-        droplet => $id,
-        action  => 'enable_private_networking',
-    });
-}
+        return $self->_droplet_action_start({
+            droplet => $id,
+            action  => 'enable_private_networking',
+        });
+    }
 
-sub droplet_disable_backups {
-    my ($self, $id) = $Check_Self_and_ID->(@_);
+    sub droplet_disable_backups {
+        my ($self, $id) = $Check_Self_and_ID->(@_);
 
-    return $self->_droplet_action_start({
-        droplet => $id,
-        action  => 'disable_backups',
-    });
+        return $self->_droplet_action_start({
+            droplet => $id,
+            action  => 'disable_backups',
+        });
+    }
 }
 
 sub droplet_action_get {
