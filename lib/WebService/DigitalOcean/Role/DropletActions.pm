@@ -210,299 +210,40 @@ sub _droplet_action_start {
 
 1;
 
-=head2 DESCRIPTION
+=head1 DESCRIPTION
 
-Implements the droplets actions resource.
+Implements the droplets actions methods.
 
-More info: L<< https://developers.digitalocean.com/#droplet-actions >>.
+=method droplet_action_get
 
-=method $do->droplet_resize(\%args)
+=method droplet_resize
 
-=head3 Arguments
+=method droplet_change_kernel
 
-=over
+=method droplet_rebuild
 
-=item C<Int> $args{droplet}
+=method droplet_restore
 
-=item C<Str> $args{size}
+=method droplet_rename
 
-=back
+=method droplet_snapshot
 
-Resizes a droplet.
+=method droplet_reboot
 
-    $do->droplet_resize({
-        droplet => 123456,
-        size    => '1gb',
-    });
+=method droplet_power_cycle
 
-More info: L<< https://developers.digitalocean.com/#resize-a-droplet >>.
+=method droplet_power_on
 
-=method $do->droplet_change_kernel(\%args)
+=method droplet_power_off
 
-=head3 Arguments
+=method droplet_password_reset
 
-=over
+=method droplet_shutdown
 
-=item C<Int> $args{droplet}
+=method droplet_enable_ipv6
 
-=item C<Int> $args{kernel}
+=method droplet_enable_private_networking
 
-=back
+=method droplet_disable_backups
 
-Changes the kernel of a droplet.
-
-    $do->droplet_change_kernel({
-        droplet => 123456,
-        kernel  => 654321,
-    });
-
-More info: L<< https://developers.digitalocean.com/#change-the-kernel >>.
-
-=method $do->droplet_rebuild(\%args)
-
-=head3 Arguments
-
-=over
-
-=item C<Int> $args{droplet}
-
-=item C<Str> $args{image}
-
-=back
-
-Rebuilds a droplet.
-
-    $do->droplet_rebuild({
-        droplet => 123456,
-        image   => 654321,
-    });
-
-More info: L<< https://developers.digitalocean.com/#rebuild-a-droplet >>.
-
-=method $do->droplet_restore(\%args)
-
-=head3 Arguments
-
-=over
-
-=item C<Int> $args{droplet}
-
-=item C<Str> $args{image}
-
-=back
-
-Restores a droplet to an image backup.
-
-    $do->droplet_rebuild({
-        droplet => 123456,
-        image   => 654321,
-    });
-
-More info: L<< https://developers.digitalocean.com/#restore-a-droplet >>.
-
-=method $do->droplet_rename(\%args)
-
-=head3 Arguments
-
-=over
-
-=item C<Int> $args{droplet}
-
-=item C<Str> $args{name}
-
-=back
-
-Renames a droplet, thus setting the reverse DNS.
-
-    $do->droplet_rename({
-        droplet => 123456,
-        name    => 'new-name',
-    });
-
-More info: L<< https://developers.digitalocean.com/#rename-a-droplet >>.
-
-=method $do->droplet_snapshot(\%args)
-
-=head3 Arguments
-
-=over
-
-=item C<Int> $args{droplet}
-
-=item C<Str> $args{name}
-
-=back
-
-Saves a snapshopt of the droplet.
-
-    $do->droplet_rebuild({
-        droplet => 123456,
-        name    => 'snapshot-name',
-    });
-
-More info: L<< https://developers.digitalocean.com/#rebuild-a-droplet >>.
-
-=method $do->droplet_reboot($droplet_id)
-
-=head3 Arguments
-
-=over
-
-=item C<Int> $droplet_id
-
-=back
-
-Reboots droplet.
-
-    $do->droplet_reboot(123456);
-
-More info: L<< https://developers.digitalocean.com/#reboot-a-droplet >>.
-
-=method $do->droplet_power_cycle($droplet_id)
-
-=head3 Arguments
-
-=over
-
-=item C<Int> $droplet_id
-
-=back
-
-Power cycles droplet.
-
-    $do->droplet_power_cycle(123456);
-
-More info: L<< https://developers.digitalocean.com/#power-cycle-a-droplet >>.
-
-=method $do->droplet_power_on($droplet_id)
-
-=head3 Arguments
-
-=over
-
-=item C<Int> $droplet_id
-
-=back
-
-Powers on droplet.
-
-    $do->droplet_power_on(123456);
-
-More info: L<< https://developers.digitalocean.com/#power-on-a-droplet >>.
-
-=method $do->droplet_power_off($droplet_id)
-
-=head3 Arguments
-
-=over
-
-=item C<Int> $droplet_id
-
-=back
-
-Powers off droplet.
-
-    $do->droplet_power_off(123456);
-
-More info: L<< https://developers.digitalocean.com/#power-off-a-droplet >>.
-
-=method $do->droplet_password_reset($droplet_id)
-
-=head3 Arguments
-
-=over
-
-=item C<Int> $droplet_id
-
-=back
-
-Resets the root password of the droplet.
-
-    $do->droplet_password_reset(123456);
-
-More info: L<< https://developers.digitalocean.com/#password-reset-a-droplet >>.
-
-=method $do->droplet_shutdown($droplet_id)
-
-=head3 Arguments
-
-=over
-
-=item C<Int> $droplet_id
-
-=back
-
-Shuts down a droplet
-
-    $do->droplet_shutdown(123456);
-
-More info: L<< https://developers.digitalocean.com/#shutdown-a-droplet >>.
-
-=method $do->droplet_enable_ipv6($droplet_id)
-
-=head3 Arguments
-
-=over
-
-=item C<Int> $droplet_id
-
-=back
-
-Enables IPv6 in a droplet.
-
-    $do->droplet_enable_ipv6(123456);
-
-More info: L<< https://developers.digitalocean.com/#enable-ipv6 >>.
-
-=method $do->droplet_enable_private_networking($droplet_id)
-
-=head3 Arguments
-
-=over
-
-=item C<Int> $droplet_id
-
-=back
-
-Enables private networking for a droplet.
-
-    $do->droplet_enable_private_networking(123456);
-
-More info: L<< https://developers.digitalocean.com/#enable-private-networking >>.
-
-=method $do->droplet_disable_backups($droplet_id)
-
-=head3 Arguments
-
-=over
-
-=item C<Int> $droplet_id
-
-=back
-
-Disables backups for the droplet.
-
-    $do->droplet_disable_backups(123456);
-
-More info: L<< https://developers.digitalocean.com/#disable-backups >>.
-
-=method $do->droplet_action_get(\%args)
-
-=head3 Arguments
-
-=over
-
-=item C<Int> $args{droplet}
-
-=item C<Int> $args{action}
-
-=back
-
-Retrieve details from a specific action.
-
-    $do->droplet_action_get({
-        droplet => 123456,
-        action  => 53,
-    });
-
-More info: L<< https://developers.digitalocean.com/#retrieve-a-droplet-action >>.
+See main documentation in L<WebService::DigitalOcean>.

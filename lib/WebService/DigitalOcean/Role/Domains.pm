@@ -48,79 +48,14 @@ sub domain_delete {
 
 =head1 DESCRIPTION
 
-Implements the domain resource.
+Implements the domain methods.
 
-More info: L<< https://developers.digitalocean.com/#domains >>.
+=method domain_create
 
-=method $do->domain_create(\%args)
+=method domain_delete
 
-=head3 Arguments
+=method domain_get
 
-=over
+=method domain_list
 
-=item C<Str> $args{name}
-
-The domain name.
-
-=item C<Str> $args{ip_address}
-
-The IP address the domain will point to.
-
-=back
-
-Creates a new domain name.
-
-    $do->domain_create({
-        name       => 'example.com',
-        ip_address => '12.34.56.78',
-    });
-
-More info: L<< https://developers.digitalocean.com/#create-a-new-domain >>.
-
-=method $do->domain_delete($domain)
-
-=head3 Arguments
-
-=over
-
-=item C<Str> $domain
-
-The domain name.
-
-=back
-
-Deletes the specified domain.
-
-    $do->domain_delete('example.com');
-
-More info: L<< https://developers.digitalocean.com/#delete-a-domain >>.
-
-=method $do->domain_get($domain)
-
-=head3 Arguments
-
-=over
-
-=item C<Str> $domain
-
-The domain name.
-
-=back
-
-Retrieves the specified domain.
-
-    my $response = $do->domain_get('example.com');
-
-More info: L<< https://developers.digitalocean.com/#retrieve-an-existing-domain >>.
-
-=method $do->domain_list()
-
-Lists all domains for this account.
-
-    my $response = $do->domain_list();
-
-    for (@{ $response->{content}{domains} }) {
-        print $_->{id};
-    }
-
-More info: L<< https://developers.digitalocean.com/#list-all-domains >>.
+See main documentation in L<WebService::DigitalOcean>.

@@ -24,16 +24,6 @@ sub size_list {
 
 Implements the Sizes resource.
 
-More info: L<< https://developers.digitalocean.com/#sizes >>.
+=method size_list
 
-=method $do->size_list()
-
-Retrieves all the sizes available in Digital Ocean.
-
-    my $sizes = $do->size_list();
-
-    for my $s (@{ $sizes->{content}{sizes} }) {
-        say "Size $s->{slug} costs $s->{price_hourly} per hour.";
-    }
-
-More info: L<< https://developers.digitalocean.com/#list-all-sizes >>.
+See main documentation in L<WebService::DigitalOcean>.

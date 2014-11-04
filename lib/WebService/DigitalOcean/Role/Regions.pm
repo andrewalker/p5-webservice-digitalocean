@@ -20,22 +20,10 @@ sub region_list {
 
 1;
 
-=head2 DESCRIPTION
+=head1 DESCRIPTION
 
 Implements the Regions resource.
 
-More info: L<< https://developers.digitalocean.com/#regions >>.
+=method region_list
 
-=method $do->region_list()
-
-Retrieves all the regions available in Digital Ocean.
-
-    my $regions = $do->region_list();
-
-    for my $r (@{ $regions->{content}{regions} }) {
-        if ($r->{available}) {
-            say "$r->{name} is available";
-        }
-    }
-
-More info: L<< https://developers.digitalocean.com/#list-all-regions >>.
+See main documentation in L<WebService::DigitalOcean>.
