@@ -1,13 +1,17 @@
 Revision history for Perl module WebService::DigitalOcean.
 
 {{$NEXT}}
+    - BACK INCOMPATIBLE CHANGE: simplify return value of all methods in the
+      "content" key of the resulting hashref, omitting the unnecessary first
+      key
+    - Rework documentation to include all methods in the main module
 
 0.011 2014-10-28T16:39:08Z
     - Fix variable scope, which broke random systems
 
 0.010 2014-10-25T20:07:57Z
-    - BACK INCOMPAT: Rework entire API to use hashrefs arguments, instead of
-      hashes
+    - BACK INCOMPATIBLE CHANGE: Rework entire API to use hashrefs arguments,
+      instead of hashes
     - Documentation improvements
     - Remove PWP::Encoding author dep
     - Create DropletActions, Sizes and Regions role
