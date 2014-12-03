@@ -39,14 +39,12 @@ __END__
 
     use WebService::DigitalOcean;
 
-    my $do = WebService::DigitalOcean->new(
-        token => $TOKEN,
-    );
+    my $do = WebService::DigitalOcean->new({ token => $TOKEN });
 
-    my $res = $do->domain_create(
+    my $res = $do->domain_create({
         name => 'example.com',
         ip_address => '127.0.0.1',
-    );
+    });
 
     if ($res->{is_success}) {
         say $res->{content}{domain}{name};
