@@ -50,9 +50,17 @@ sub make_request {
     if ($response->content_type eq 'application/json') {
         my $decoded_response = JSON::decode_json($response->decoded_content);
 
-        if (is_HashRef($decoded_response) && keys(%$decoded_response) == 1) {
-            my @key = keys %$decoded_response;
-            $result->{content} = delete $decoded_response->{$key[0]};
+        if (is_HashRef($decoded_response)) {
+            $result->{meta}  = delete $decoded_response->{meta};
+            $result->{links} = delete $decoded_response->{links};
+
+            if (keys(%$decoded_response) == 1) {
+                my @key = keys %$decoded_response;
+                $result->{content} = delete $decoded_response->{$key[0]};
+            }
+            else {
+                $result->{content} = $decoded_response;
+            }
         }
         else {
             $result->{content} = $decoded_response;
