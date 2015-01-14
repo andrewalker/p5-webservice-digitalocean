@@ -77,7 +77,7 @@ L<< https://cloud.digitalocean.com/settings/applications >>.
 
 =head2 $do->domain_create(\%args)
 
-=head3 Arguments
+B<Arguments:>
 
 =over
 
@@ -102,7 +102,7 @@ More info: L<< https://developers.digitalocean.com/#create-a-new-domain >>.
 
 =head2 $do->domain_delete($domain)
 
-=head3 Arguments
+B<Arguments:>
 
 =over
 
@@ -120,7 +120,7 @@ More info: L<< https://developers.digitalocean.com/#delete-a-domain >>.
 
 =head2 $do->domain_get($domain)
 
-=head3 Arguments
+B<Arguments:>
 
 =over
 
@@ -150,7 +150,7 @@ More info: L<< https://developers.digitalocean.com/#list-all-domains >>.
 
 =head2 $do->domain_record_create(\%args)
 
-=head3 Arguments
+B<Arguments:>
 
 =over
 
@@ -199,7 +199,7 @@ More info: L<< https://developers.digitalocean.com/#create-a-new-domain-record >
 
 =head2 $do->domain_record_delete(\%args)
 
-=head3 Arguments
+B<Arguments:>
 
 =over
 
@@ -224,7 +224,7 @@ More info: L<< https://developers.digitalocean.com/#delete-a-domain-record >>.
 
 =head2 $do->domain_record_get(\%args)
 
-=head3 Arguments
+B<Arguments:>
 
 =over
 
@@ -251,7 +251,7 @@ More info: L<< https://developers.digitalocean.com/#retrieve-an-existing-domain-
 
 =head2 $do->domain_record_list($domain)
 
-=head3 Arguments
+B<Arguments:>
 
 =over
 
@@ -273,7 +273,7 @@ More info: L<< https://developers.digitalocean.com/#list-all-domain-records >>.
 
 =head2 $do->droplet_create(\%args)
 
-=head3 Arguments
+B<Arguments:>
 
 =over
 
@@ -284,6 +284,8 @@ More info: L<< https://developers.digitalocean.com/#list-all-domain-records >>.
 =item C<Str> $args{size}
 
 =item C<Str> $args{image}
+
+=item C<Str> $args{user_data} (optional)
 
 =item C<ArrayRef> $args{ssh_keys} (optional)
 
@@ -312,7 +314,7 @@ More info: L<< https://developers.digitalocean.com/#create-a-new-droplet >>.
 
 =head2 $do->droplet_delete($id)
 
-=head3 Arguments
+B<Arguments:>
 
 =over
 
@@ -328,7 +330,7 @@ More info: L<< https://developers.digitalocean.com/#delete-a-droplet >>.
 
 =head2 $do->droplet_get($id)
 
-=head3 Arguments
+B<Arguments:>
 
 =over
 
@@ -356,7 +358,7 @@ More info: L<< https://developers.digitalocean.com/#list-all-droplets >>.
 
 =head2 $do->droplet_resize(\%args)
 
-=head3 Arguments
+B<Arguments:>
 
 =over
 
@@ -377,7 +379,7 @@ More info: L<< https://developers.digitalocean.com/#resize-a-droplet >>.
 
 =head2 $do->droplet_change_kernel(\%args)
 
-=head3 Arguments
+B<Arguments:>
 
 =over
 
@@ -398,7 +400,7 @@ More info: L<< https://developers.digitalocean.com/#change-the-kernel >>.
 
 =head2 $do->droplet_rebuild(\%args)
 
-=head3 Arguments
+B<Arguments:>
 
 =over
 
@@ -419,7 +421,7 @@ More info: L<< https://developers.digitalocean.com/#rebuild-a-droplet >>.
 
 =head2 $do->droplet_restore(\%args)
 
-=head3 Arguments
+B<Arguments:>
 
 =over
 
@@ -440,7 +442,7 @@ More info: L<< https://developers.digitalocean.com/#restore-a-droplet >>.
 
 =head2 $do->droplet_rename(\%args)
 
-=head3 Arguments
+B<Arguments:>
 
 =over
 
@@ -461,7 +463,7 @@ More info: L<< https://developers.digitalocean.com/#rename-a-droplet >>.
 
 =head2 $do->droplet_snapshot(\%args)
 
-=head3 Arguments
+B<Arguments:>
 
 =over
 
@@ -482,7 +484,7 @@ More info: L<< https://developers.digitalocean.com/#rebuild-a-droplet >>.
 
 =head2 $do->droplet_reboot($droplet_id)
 
-=head3 Arguments
+B<Arguments:>
 
 =over
 
@@ -498,7 +500,7 @@ More info: L<< https://developers.digitalocean.com/#reboot-a-droplet >>.
 
 =head2 $do->droplet_power_cycle($droplet_id)
 
-=head3 Arguments
+B<Arguments:>
 
 =over
 
@@ -514,7 +516,7 @@ More info: L<< https://developers.digitalocean.com/#power-cycle-a-droplet >>.
 
 =head2 $do->droplet_power_on($droplet_id)
 
-=head3 Arguments
+B<Arguments:>
 
 =over
 
@@ -530,7 +532,7 @@ More info: L<< https://developers.digitalocean.com/#power-on-a-droplet >>.
 
 =head2 $do->droplet_power_off($droplet_id)
 
-=head3 Arguments
+B<Arguments:>
 
 =over
 
@@ -546,7 +548,7 @@ More info: L<< https://developers.digitalocean.com/#power-off-a-droplet >>.
 
 =head2 $do->droplet_password_reset($droplet_id)
 
-=head3 Arguments
+B<Arguments:>
 
 =over
 
@@ -562,7 +564,7 @@ More info: L<< https://developers.digitalocean.com/#password-reset-a-droplet >>.
 
 =head2 $do->droplet_shutdown($droplet_id)
 
-=head3 Arguments
+B<Arguments:>
 
 =over
 
@@ -578,7 +580,7 @@ More info: L<< https://developers.digitalocean.com/#shutdown-a-droplet >>.
 
 =head2 $do->droplet_enable_ipv6($droplet_id)
 
-=head3 Arguments
+B<Arguments:>
 
 =over
 
@@ -594,7 +596,7 @@ More info: L<< https://developers.digitalocean.com/#enable-ipv6 >>.
 
 =head2 $do->droplet_enable_private_networking($droplet_id)
 
-=head3 Arguments
+B<Arguments:>
 
 =over
 
@@ -610,7 +612,7 @@ More info: L<< https://developers.digitalocean.com/#enable-private-networking >>
 
 =head2 $do->droplet_disable_backups($droplet_id)
 
-=head3 Arguments
+B<Arguments:>
 
 =over
 
@@ -626,7 +628,7 @@ More info: L<< https://developers.digitalocean.com/#disable-backups >>.
 
 =head2 $do->droplet_action_get(\%args)
 
-=head3 Arguments
+B<Arguments:>
 
 =over
 
@@ -647,7 +649,7 @@ More info: L<< https://developers.digitalocean.com/#retrieve-a-droplet-action >>
 
 =head2 $do->key_create(\%args)
 
-=head3 Arguments
+B<Arguments:>
 
 =over
 
@@ -668,7 +670,7 @@ More info: L<< https://developers.digitalocean.com/#create-a-new-key >>.
 
 =head2 $do->key_delete(\%args)
 
-=head3 Arguments
+B<Arguments:>
 
 =over
 
@@ -686,7 +688,7 @@ More info: L<< https://developers.digitalocean.com/#destroy-a-key >>.
 
 =head2 $do->key_get(\%args)
 
-=head3 Arguments
+B<Arguments:>
 
 =over
 
