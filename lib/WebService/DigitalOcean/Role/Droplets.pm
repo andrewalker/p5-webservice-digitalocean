@@ -18,6 +18,7 @@ sub droplet_create {
             region             => Str,
             size               => Str,
             image              => Str,
+            user_data          => Optional[ Str ],
             ssh_keys           => Optional[ ArrayRef ],
             backups            => Optional[ Bool ],
             ipv6               => Optional[ Bool ],
