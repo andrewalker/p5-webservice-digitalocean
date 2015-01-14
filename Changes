@@ -1,6 +1,10 @@
 Revision history for Perl module WebService::DigitalOcean.
 
 {{$NEXT}}
+    - Add user_data argument for droplet_create
+    - Improve POD format in docs
+
+0.020 2014-12-03T21:32:39Z
     - BACK INCOMPATIBLE CHANGE: simplify return value of all methods in the
       "content" key of the resulting hashref, omitting the unnecessary first
       key
