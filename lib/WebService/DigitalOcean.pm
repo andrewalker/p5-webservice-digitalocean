@@ -41,17 +41,69 @@ __END__
 
     my $do = WebService::DigitalOcean->new({ token => $TOKEN });
 
-    my $res = $do->domain_create({
-        name => 'example.com',
-        ip_address => '127.0.0.1',
+    ###
+    ## Upload your public ssh key
+    ###
+
+    open my $fh, '<', $ENV{HOME} . '/.ssh/id_rsa.pub';
+    my $key = $do->key_create({
+        name       => 'Andre Walker',
+        public_key => do { local $/ = <$fh> },
+    });
+    close $fh;
+
+    ###
+    ## Select a random available region to create a droplet
+    ###
+
+    my @regions = grep { $_->{available} } @{ $do->region_list->{content} };
+    my $random_region = $regions[rand @regions];
+
+    ###
+    ## Create droplets!
+    ###
+
+    my $droplet1_res = $do->droplet_create({
+        name               => 'server1.example.com',
+        region             => $random_region->{slug},
+        size               => '1gb',
+        image              => 'ubuntu-14-04-x64',
+        ssh_keys           => [ $key->{content}{fingerprint} ],
     });
 
-    if ($res->{is_success}) {
-        say $res->{content}{name};
-    }
-    else {
-        say "Could not create domain";
-    }
+    die "Could not create droplet 1" unless $droplet1_res->{is_success};
+
+    my $droplet2_res = $do->droplet_create({
+        name               => 'server2.example.com',
+        region             => $random_region->{slug},
+        size               => '1gb',
+        image              => 'ubuntu-14-04-x64',
+        ssh_keys           => [ $key->{content}{fingerprint} ],
+    });
+
+    die "Could not create droplet 2" unless $droplet2_res->{is_success};
+
+    ###
+    ## Create domains
+    ###
+
+    my $subdomain1_res = $do->domain_record_create({
+        domain => 'example.com',
+        type   => 'A',
+        name   => 'server1',
+        data   => $droplet1_res->{content}{networks}{v4}{ip_address},
+    });
+
+    die "Could not create subdomain server1" unless $subdomain1_res->{is_success};
+
+    my $subdomain2_res = $do->domain_create({
+        domain => 'example.com',
+        type   => 'A',
+        name   => 'server2',
+        data   => $droplet2_res->{content}{networks}{v4}{ip_address},
+    });
+
+    die "Could not create subdomain server2" unless $subdomain2_res->{is_success};
 
 =head1 DESCRIPTION
 
@@ -75,7 +127,12 @@ L<< https://cloud.digitalocean.com/settings/applications >>.
 
 =head1 METHODS
 
-=head2 $do->domain_create(\%args)
+=head2 domain_create
+
+    my $res = $do->domain_create({
+        name       => 'example.com',
+        ip_address => '12.34.56.78',
+    });
 
 B<Arguments:>
 
@@ -91,16 +148,13 @@ The IP address the domain will point to.
 
 =back
 
-Creates a new domain name.
-
-    $do->domain_create({
-        name       => 'example.com',
-        ip_address => '12.34.56.78',
-    });
+Creates a new top level domain.
 
 More info: L<< https://developers.digitalocean.com/#create-a-new-domain >>.
 
-=head2 $do->domain_delete($domain)
+=head2 domain_delete
+
+    $do->domain_delete('example.com');
 
 B<Arguments:>
 
@@ -114,11 +168,11 @@ The domain name.
 
 Deletes the specified domain.
 
-    $do->domain_delete('example.com');
-
 More info: L<< https://developers.digitalocean.com/#delete-a-domain >>.
 
-=head2 $do->domain_get($domain)
+=head2 domain_get
+
+    my $response = $do->domain_get('example.com');
 
 B<Arguments:>
 
@@ -132,23 +186,30 @@ The domain name.
 
 Retrieves the specified domain.
 
-    my $response = $do->domain_get('example.com');
-
 More info: L<< https://developers.digitalocean.com/#retrieve-an-existing-domain >>.
 
-=head2 $do->domain_list()
-
-Lists all domains for this account.
+=head2 domain_list
 
     my $response = $do->domain_list();
 
     for (@{ $response->{content} }) {
-        print $_->{id};
+        say $_->{id};
     }
+
+Lists all domains for this account.
 
 More info: L<< https://developers.digitalocean.com/#list-all-domains >>.
 
-=head2 $do->domain_record_create(\%args)
+=head2 domain_record_create
+
+    my $response = $do->domain_record_create({
+        domain => 'example.com',
+        type   => 'A',
+        name   => 'www2',
+        data   => '12.34.56.78',
+    });
+
+    my $id = $response->{content}{id};
 
 B<Arguments:>
 
@@ -186,18 +247,14 @@ The weight, for SRV records.
 
 Creates a new record for a domain.
 
-    my $response = $do->domain_record_create({
-        domain => 'example.com',
-        type   => 'A',
-        name   => 'www2',
-        data   => '12.34.56.78',
-    });
-
-    my $id = $response->{content}{id};
-
 More info: L<< https://developers.digitalocean.com/#create-a-new-domain-record >>.
 
-=head2 $do->domain_record_delete(\%args)
+=head2 domain_record_delete
+
+    $do->domain_record_delete({
+        domain => 'example.com',
+        id     => 1215,
+    });
 
 B<Arguments:>
 
@@ -215,14 +272,16 @@ The id of the record.
 
 Deletes the specified record.
 
-    $do->domain_record_delete({
+More info: L<< https://developers.digitalocean.com/#delete-a-domain-record >>.
+
+=head2 domain_record_get
+
+    my $response = $do->domain_record_get({
         domain => 'example.com',
         id     => 1215,
     });
 
-More info: L<< https://developers.digitalocean.com/#delete-a-domain-record >>.
-
-=head2 $do->domain_record_get(\%args)
+    my $ip = $response->{content}{data};
 
 B<Arguments:>
 
@@ -240,16 +299,15 @@ The id of the record.
 
 Retrieves details about a particular record, identified by id.
 
-    my $response = $do->domain_record_get({
-        domain => 'example.com',
-        id     => 1215,
-    });
-
-    my $ip = $response->{content}{data};
-
 More info: L<< https://developers.digitalocean.com/#retrieve-an-existing-domain-record >>.
 
-=head2 $do->domain_record_list($domain)
+=head2 domain_record_list
+
+    my $response = $do->domain_record_list('example.com');
+
+    for (@{ $response->{content} }) {
+        print "$_->{name} => $_->{data}\n";
+    }
 
 B<Arguments:>
 
@@ -263,15 +321,20 @@ The domain to which the records belong.
 
 Retrieves all the records for a particular domain.
 
-    my $response = $do->domain_record_list('example.com');
-
-    for (@{ $response->{content} }) {
-        print "$_->{name} => $_->{data}\n";
-    }
-
 More info: L<< https://developers.digitalocean.com/#list-all-domain-records >>.
 
-=head2 $do->droplet_create(\%args)
+=head2 droplet_create
+
+    $do->droplet_create(
+        name               => "My-Droplet",
+        region             => "nyc1",
+        size               => "512mb",
+        image              => 449676389,
+        ssh_keys           => [ 52341234, 215124, 64325534 ],
+        backups            => 0,
+        ipv6               => 1,
+        private_networking => 0,
+    );
 
 B<Arguments:>
 
@@ -299,20 +362,11 @@ B<Arguments:>
 
 Creates a new droplet.
 
-    $do->droplet_create(
-        name               => "My-Droplet",
-        region             => "nyc1",
-        size               => "512mb",
-        image              => 449676389,
-        ssh_keys           => [ 52341234, 215124, 64325534 ],
-        backups            => 0,
-        ipv6               => 1,
-        private_networking => 0,
-    );
-
 More info: L<< https://developers.digitalocean.com/#create-a-new-droplet >>.
 
-=head2 $do->droplet_delete($id)
+=head2 droplet_delete
+
+    $do->droplet_delete(1250928);
 
 B<Arguments:>
 
@@ -324,11 +378,11 @@ B<Arguments:>
 
 Deletes the specified droplet.
 
-    $do->droplet_delete(1250928);
-
 More info: L<< https://developers.digitalocean.com/#delete-a-droplet >>.
 
-=head2 $do->droplet_get($id)
+=head2 droplet_get
+
+    my $response = $do->droplet_get(15314123);
 
 B<Arguments:>
 
@@ -340,13 +394,9 @@ B<Arguments:>
 
 Retrieves the specified droplet.
 
-    my $response = $do->droplet_get(15314123);
-
 More info: L<< https://developers.digitalocean.com/#retrieve-an-existing-droplet-by-id >>.
 
-=head2 $do->droplet_list()
-
-Lists all droplets for this account.
+=head2 droplet_list
 
     my $response = $do->droplet_list();
 
@@ -354,9 +404,16 @@ Lists all droplets for this account.
         print $_->{id};
     }
 
+Lists all droplets for this account.
+
 More info: L<< https://developers.digitalocean.com/#list-all-droplets >>.
 
-=head2 $do->droplet_resize(\%args)
+=head2 droplet_resize
+
+    $do->droplet_resize({
+        droplet => 123456,
+        size    => '1gb',
+    });
 
 B<Arguments:>
 
@@ -370,14 +427,14 @@ B<Arguments:>
 
 Resizes a droplet.
 
-    $do->droplet_resize({
-        droplet => 123456,
-        size    => '1gb',
-    });
-
 More info: L<< https://developers.digitalocean.com/#resize-a-droplet >>.
 
-=head2 $do->droplet_change_kernel(\%args)
+=head2 droplet_change_kernel
+
+    $do->droplet_change_kernel({
+        droplet => 123456,
+        kernel  => 654321,
+    });
 
 B<Arguments:>
 
@@ -391,14 +448,14 @@ B<Arguments:>
 
 Changes the kernel of a droplet.
 
-    $do->droplet_change_kernel({
-        droplet => 123456,
-        kernel  => 654321,
-    });
-
 More info: L<< https://developers.digitalocean.com/#change-the-kernel >>.
 
-=head2 $do->droplet_rebuild(\%args)
+=head2 droplet_rebuild
+
+    $do->droplet_rebuild({
+        droplet => 123456,
+        image   => 654321,
+    });
 
 B<Arguments:>
 
@@ -412,14 +469,14 @@ B<Arguments:>
 
 Rebuilds a droplet.
 
+More info: L<< https://developers.digitalocean.com/#rebuild-a-droplet >>.
+
+=head2 droplet_restore
+
     $do->droplet_rebuild({
         droplet => 123456,
         image   => 654321,
     });
-
-More info: L<< https://developers.digitalocean.com/#rebuild-a-droplet >>.
-
-=head2 $do->droplet_restore(\%args)
 
 B<Arguments:>
 
@@ -433,14 +490,14 @@ B<Arguments:>
 
 Restores a droplet to an image backup.
 
-    $do->droplet_rebuild({
-        droplet => 123456,
-        image   => 654321,
-    });
-
 More info: L<< https://developers.digitalocean.com/#restore-a-droplet >>.
 
-=head2 $do->droplet_rename(\%args)
+=head2 droplet_rename
+
+    $do->droplet_rename({
+        droplet => 123456,
+        name    => 'new-name',
+    });
 
 B<Arguments:>
 
@@ -454,14 +511,14 @@ B<Arguments:>
 
 Renames a droplet, thus setting the reverse DNS.
 
-    $do->droplet_rename({
-        droplet => 123456,
-        name    => 'new-name',
-    });
-
 More info: L<< https://developers.digitalocean.com/#rename-a-droplet >>.
 
-=head2 $do->droplet_snapshot(\%args)
+=head2 droplet_snapshot
+
+    $do->droplet_rebuild({
+        droplet => 123456,
+        name    => 'snapshot-name',
+    });
 
 B<Arguments:>
 
@@ -475,14 +532,11 @@ B<Arguments:>
 
 Saves a snapshopt of the droplet.
 
-    $do->droplet_rebuild({
-        droplet => 123456,
-        name    => 'snapshot-name',
-    });
-
 More info: L<< https://developers.digitalocean.com/#rebuild-a-droplet >>.
 
-=head2 $do->droplet_reboot($droplet_id)
+=head2 droplet_reboot
+
+    $do->droplet_reboot(123456);
 
 B<Arguments:>
 
@@ -494,11 +548,11 @@ B<Arguments:>
 
 Reboots droplet.
 
-    $do->droplet_reboot(123456);
-
 More info: L<< https://developers.digitalocean.com/#reboot-a-droplet >>.
 
-=head2 $do->droplet_power_cycle($droplet_id)
+=head2 droplet_power_cycle
+
+    $do->droplet_power_cycle(123456);
 
 B<Arguments:>
 
@@ -510,11 +564,11 @@ B<Arguments:>
 
 Power cycles droplet.
 
-    $do->droplet_power_cycle(123456);
-
 More info: L<< https://developers.digitalocean.com/#power-cycle-a-droplet >>.
 
-=head2 $do->droplet_power_on($droplet_id)
+=head2 droplet_power_on
+
+    $do->droplet_power_on(123456);
 
 B<Arguments:>
 
@@ -526,11 +580,11 @@ B<Arguments:>
 
 Powers on droplet.
 
-    $do->droplet_power_on(123456);
-
 More info: L<< https://developers.digitalocean.com/#power-on-a-droplet >>.
 
-=head2 $do->droplet_power_off($droplet_id)
+=head2 droplet_power_off
+
+    $do->droplet_power_off(123456);
 
 B<Arguments:>
 
@@ -542,11 +596,11 @@ B<Arguments:>
 
 Powers off droplet.
 
-    $do->droplet_power_off(123456);
-
 More info: L<< https://developers.digitalocean.com/#power-off-a-droplet >>.
 
-=head2 $do->droplet_password_reset($droplet_id)
+=head2 droplet_password_reset
+
+    $do->droplet_password_reset(123456);
 
 B<Arguments:>
 
@@ -558,11 +612,11 @@ B<Arguments:>
 
 Resets the root password of the droplet.
 
-    $do->droplet_password_reset(123456);
-
 More info: L<< https://developers.digitalocean.com/#password-reset-a-droplet >>.
 
-=head2 $do->droplet_shutdown($droplet_id)
+=head2 droplet_shutdown
+
+    $do->droplet_shutdown(123456);
 
 B<Arguments:>
 
@@ -574,11 +628,11 @@ B<Arguments:>
 
 Shuts down a droplet
 
-    $do->droplet_shutdown(123456);
-
 More info: L<< https://developers.digitalocean.com/#shutdown-a-droplet >>.
 
-=head2 $do->droplet_enable_ipv6($droplet_id)
+=head2 droplet_enable_ipv6
+
+    $do->droplet_enable_ipv6(123456);
 
 B<Arguments:>
 
@@ -590,11 +644,11 @@ B<Arguments:>
 
 Enables IPv6 in a droplet.
 
-    $do->droplet_enable_ipv6(123456);
-
 More info: L<< https://developers.digitalocean.com/#enable-ipv6 >>.
 
-=head2 $do->droplet_enable_private_networking($droplet_id)
+=head2 droplet_enable_private_networking
+
+    $do->droplet_enable_private_networking(123456);
 
 B<Arguments:>
 
@@ -606,11 +660,11 @@ B<Arguments:>
 
 Enables private networking for a droplet.
 
-    $do->droplet_enable_private_networking(123456);
-
 More info: L<< https://developers.digitalocean.com/#enable-private-networking >>.
 
-=head2 $do->droplet_disable_backups($droplet_id)
+=head2 droplet_disable_backups
+
+    $do->droplet_disable_backups(123456);
 
 B<Arguments:>
 
@@ -622,11 +676,14 @@ B<Arguments:>
 
 Disables backups for the droplet.
 
-    $do->droplet_disable_backups(123456);
-
 More info: L<< https://developers.digitalocean.com/#disable-backups >>.
 
-=head2 $do->droplet_action_get(\%args)
+=head2 droplet_action_get
+
+    $do->droplet_action_get({
+        droplet => 123456,
+        action  => 53,
+    });
 
 B<Arguments:>
 
@@ -640,14 +697,14 @@ B<Arguments:>
 
 Retrieve details from a specific action.
 
-    $do->droplet_action_get({
-        droplet => 123456,
-        action  => 53,
-    });
-
 More info: L<< https://developers.digitalocean.com/#retrieve-a-droplet-action >>.
 
-=head2 $do->key_create(\%args)
+=head2 key_create
+
+    my $response = $do->key_create({
+        name       => 'my public key',
+        public_key => <$public_key_fh>,
+    });
 
 B<Arguments:>
 
@@ -661,14 +718,11 @@ B<Arguments:>
 
 Creates a new ssh key for this account.
 
-    my $response = $do->key_create({
-        name       => 'my public key',
-        public_key => <$public_key_fh>,
-    });
-
 More info: L<< https://developers.digitalocean.com/#create-a-new-key >>.
 
-=head2 $do->key_delete(\%args)
+=head2 key_delete
+
+    $do->key_delete({ id => 146432 });
 
 B<Arguments:>
 
@@ -682,11 +736,11 @@ B<Arguments:>
 
 Deletes the specified ssh key.
 
-    $do->key_delete({ id => 146432 });
-
 More info: L<< https://developers.digitalocean.com/#destroy-a-key >>.
 
-=head2 $do->key_get(\%args)
+=head2 key_get
+
+    my $response = $do->key_get({ id => 1215 });
 
 B<Arguments:>
 
@@ -700,19 +754,15 @@ B<Arguments:>
 
 Retrieves details about a particular ssh key, identified by id or fingerprint (pick one).
 
-    my $response = $do->key_get({ id => 1215 });
-
 More info: L<< https://developers.digitalocean.com/#retrieve-an-existing-key >>.
 
-=head2 $do->key_list()
+=head2 key_list
 
 Retrieves all the keys for this account.
 
 More info: L<< https://developers.digitalocean.com/#list-all-keys >>.
 
-=head2 $do->region_list()
-
-Retrieves all the regions available in Digital Ocean.
+=head2 region_list
 
     my $regions = $do->region_list();
 
@@ -721,6 +771,8 @@ Retrieves all the regions available in Digital Ocean.
             say "$r->{name} is available";
         }
     }
+
+Retrieves all the regions available in Digital Ocean.
 
 More info: L<< https://developers.digitalocean.com/#list-all-regions >>.
 
