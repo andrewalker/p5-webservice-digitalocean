@@ -65,8 +65,9 @@ sub make_request {
     my $ratelimit = $self->_get_ratelimit( $response->headers );
 
     my $content = $self->_get_content(
-        $response->content_type,
-        $response->decoded_content,
+        # avoid ``wantarray`` problems by setting scalar context
+        my $ct = $response->content_type,
+        my $dc = $response->decoded_content,
     );
 
     return { %$result, %$ratelimit, %$content };
