@@ -70,13 +70,23 @@ my @size_methods = qw/
   size_list
 /;
 
+my @ua_methods = qw/
+  make_request
+/;
+
 for (
     @domain_record_methods, @domain_methods,  @droplet_action_methods,
     @key_methods,           @droplet_methods, @region_methods,
-    @size_methods,
+    @size_methods,          @ua_methods
   )
 {
     ok( $do->can($_), '$do can ' . $_ );
 }
+
+like(
+    exception { $do = WebService::DigitalOcean->new() },
+    qr/missing required arguments.*token/i,
+    '$do complains about `token` not being set',
+);
 
 done_testing;
