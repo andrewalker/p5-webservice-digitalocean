@@ -109,11 +109,6 @@ __END__
 
 This module implements DigitalOceans new RESTful API.
 
-It's on a very early stage of development, so expect new features, better docs
-and tests very soon.
-
-Patches welcome: L<< https://github.com/andrewalker/p5-webservice-digitalocean >>
-
 =attr api_base_url
 
 A string prepended to all API endpoints. By default, it's
@@ -803,11 +798,3 @@ moment.
 Documentation for API v2, in DigitalOcean's website.
 
 =back
-
-=head1 CAVEATS
-
-This is alpha software. The interface is unstable, and may change without
-notice.
-
-Also, there are no real unit tests. We currently only test compilation and
-instantiation of the module.
