@@ -1,6 +1,8 @@
 Revision history for Perl module WebService::DigitalOcean.
 
 {{$NEXT}}
+
+0.022 2015-01-17T03:29:11Z
     - Yet another rework in docs, changing the way the methods were listed
 
 0.021 2015-01-14T18:37:33Z

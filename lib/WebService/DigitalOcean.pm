@@ -771,7 +771,7 @@ Retrieves all the regions available in Digital Ocean.
 
 More info: L<< https://developers.digitalocean.com/#list-all-regions >>.
 
-=head2 $do->size_list()
+=head2 size_list
 
 Retrieves all the sizes available in Digital Ocean.
 
