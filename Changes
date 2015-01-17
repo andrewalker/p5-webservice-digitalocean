@@ -1,6 +1,8 @@
 Revision history for Perl module WebService::DigitalOcean.
 
 {{$NEXT}}
+
+0.023 2015-01-17T03:37:56Z
     - Fix documentation formatting in one of the methods, which was still using
       the old format: $do->region_list()
     - Update Changes file for 0.022 version
