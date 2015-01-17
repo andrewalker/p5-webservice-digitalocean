@@ -1,4 +1,4 @@
-requires 'perl', '5.010';
+requires 'perl', '5.012';
 requires 'Moo';
 requires 'LWP::UserAgent';
 requires 'FindBin';
