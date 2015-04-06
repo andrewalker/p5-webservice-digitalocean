@@ -3,7 +3,7 @@ package WebService::DigitalOcean::Role::DropletActions;
 use utf8;
 use Moo::Role;
 use feature 'state';
-use Types::Standard qw/Str Enum Object Dict Int/;
+use Types::Standard qw/Str Enum Object Dict Int Bool/;
 use Type::Utils;
 use Type::Params qw/compile multisig/;
 
@@ -16,6 +16,7 @@ sub droplet_resize {
         Object,
         Dict[
             droplet => Int,
+            disk    => Bool,
             size    => Str,
         ],
     );

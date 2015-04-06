@@ -407,6 +407,7 @@ More info: L<< https://developers.digitalocean.com/#list-all-droplets >>.
 
     $do->droplet_resize({
         droplet => 123456,
+        disk    => 1,
         size    => '1gb',
     });
 
@@ -415,6 +416,8 @@ B<Arguments:>
 =over
 
 =item C<Int> $args{droplet}
+
+=item C<Bool> $args{disk}
 
 =item C<Str> $args{size}
 
