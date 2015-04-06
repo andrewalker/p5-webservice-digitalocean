@@ -110,7 +110,7 @@ sub droplet_snapshot {
 
         return $self->_droplet_action_start({
             droplet => $id,
-            action  => 'reboot',
+            type    => 'reboot',
         });
     }
 
@@ -119,7 +119,7 @@ sub droplet_snapshot {
 
         return $self->_droplet_action_start({
             droplet => $id,
-            action  => 'power_cycle',
+            type    => 'power_cycle',
         });
     }
 
@@ -128,7 +128,7 @@ sub droplet_snapshot {
 
         return $self->_droplet_action_start({
             droplet => $id,
-            action  => 'power_on',
+            type    => 'power_on',
         });
     }
 
@@ -137,7 +137,7 @@ sub droplet_snapshot {
 
         return $self->_droplet_action_start({
             droplet => $id,
-            action  => 'power_off',
+            type    => 'power_off',
         });
     }
 
@@ -146,7 +146,7 @@ sub droplet_snapshot {
 
         return $self->_droplet_action_start({
             droplet => $id,
-            action  => 'password_reset',
+            type    => 'password_reset',
         });
     }
 
@@ -155,7 +155,7 @@ sub droplet_snapshot {
 
         return $self->_droplet_action_start({
             droplet => $id,
-            action  => 'shutdown',
+            type    => 'shutdown',
         });
     }
 
@@ -164,7 +164,7 @@ sub droplet_snapshot {
 
         return $self->_droplet_action_start({
             droplet => $id,
-            action  => 'enable_ipv6',
+            type    => 'enable_ipv6',
         });
     }
 
@@ -173,7 +173,7 @@ sub droplet_snapshot {
 
         return $self->_droplet_action_start({
             droplet => $id,
-            action  => 'enable_private_networking',
+            type    => 'enable_private_networking',
         });
     }
 
@@ -182,7 +182,7 @@ sub droplet_snapshot {
 
         return $self->_droplet_action_start({
             droplet => $id,
-            action  => 'disable_backups',
+            type    => 'disable_backups',
         });
     }
 }
