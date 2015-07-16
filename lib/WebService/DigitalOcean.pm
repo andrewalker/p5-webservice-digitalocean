@@ -15,7 +15,8 @@ with
     'WebService::DigitalOcean::Role::DropletActions',
     'WebService::DigitalOcean::Role::Keys',
     'WebService::DigitalOcean::Role::Regions',
-    'WebService::DigitalOcean::Role::Sizes';
+    'WebService::DigitalOcean::Role::Sizes',
+    'WebService::DigitalOcean::Role::Images';
 
 # VERSION
 
@@ -145,7 +146,7 @@ The IP address the domain will point to.
 
 Creates a new top level domain.
 
-More info: L<< https://developers.digitalocean.com/#create-a-new-domain >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#create-a-new-domain >>.
 
 =head2 domain_delete
 
@@ -163,7 +164,7 @@ The domain name.
 
 Deletes the specified domain.
 
-More info: L<< https://developers.digitalocean.com/#delete-a-domain >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#delete-a-domain >>.
 
 =head2 domain_get
 
@@ -181,7 +182,7 @@ The domain name.
 
 Retrieves the specified domain.
 
-More info: L<< https://developers.digitalocean.com/#retrieve-an-existing-domain >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-domain >>.
 
 =head2 domain_list
 
@@ -193,7 +194,7 @@ More info: L<< https://developers.digitalocean.com/#retrieve-an-existing-domain 
 
 Lists all domains for this account.
 
-More info: L<< https://developers.digitalocean.com/#list-all-domains >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#list-all-domains >>.
 
 =head2 domain_record_create
 
@@ -242,7 +243,7 @@ The weight, for SRV records.
 
 Creates a new record for a domain.
 
-More info: L<< https://developers.digitalocean.com/#create-a-new-domain-record >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#create-a-new-domain-record >>.
 
 =head2 domain_record_delete
 
@@ -267,7 +268,7 @@ The id of the record.
 
 Deletes the specified record.
 
-More info: L<< https://developers.digitalocean.com/#delete-a-domain-record >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#delete-a-domain-record >>.
 
 =head2 domain_record_get
 
@@ -294,7 +295,7 @@ The id of the record.
 
 Retrieves details about a particular record, identified by id.
 
-More info: L<< https://developers.digitalocean.com/#retrieve-an-existing-domain-record >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-domain-record >>.
 
 =head2 domain_record_list
 
@@ -316,7 +317,7 @@ The domain to which the records belong.
 
 Retrieves all the records for a particular domain.
 
-More info: L<< https://developers.digitalocean.com/#list-all-domain-records >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#list-all-domain-records >>.
 
 =head2 droplet_create
 
@@ -357,7 +358,7 @@ B<Arguments:>
 
 Creates a new droplet.
 
-More info: L<< https://developers.digitalocean.com/#create-a-new-droplet >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#create-a-new-droplet >>.
 
 =head2 droplet_delete
 
@@ -373,7 +374,7 @@ B<Arguments:>
 
 Deletes the specified droplet.
 
-More info: L<< https://developers.digitalocean.com/#delete-a-droplet >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#delete-a-droplet >>.
 
 =head2 droplet_get
 
@@ -389,7 +390,7 @@ B<Arguments:>
 
 Retrieves the specified droplet.
 
-More info: L<< https://developers.digitalocean.com/#retrieve-an-existing-droplet-by-id >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-droplet-by-id >>.
 
 =head2 droplet_list
 
@@ -401,7 +402,7 @@ More info: L<< https://developers.digitalocean.com/#retrieve-an-existing-droplet
 
 Lists all droplets for this account.
 
-More info: L<< https://developers.digitalocean.com/#list-all-droplets >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#list-all-droplets >>.
 
 =head2 droplet_resize
 
@@ -425,7 +426,7 @@ B<Arguments:>
 
 Resizes a droplet.
 
-More info: L<< https://developers.digitalocean.com/#resize-a-droplet >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#resize-a-droplet >>.
 
 =head2 droplet_change_kernel
 
@@ -446,7 +447,7 @@ B<Arguments:>
 
 Changes the kernel of a droplet.
 
-More info: L<< https://developers.digitalocean.com/#change-the-kernel >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#change-the-kernel >>.
 
 =head2 droplet_rebuild
 
@@ -467,7 +468,7 @@ B<Arguments:>
 
 Rebuilds a droplet.
 
-More info: L<< https://developers.digitalocean.com/#rebuild-a-droplet >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#rebuild-a-droplet >>.
 
 =head2 droplet_restore
 
@@ -488,7 +489,7 @@ B<Arguments:>
 
 Restores a droplet to an image backup.
 
-More info: L<< https://developers.digitalocean.com/#restore-a-droplet >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#restore-a-droplet >>.
 
 =head2 droplet_rename
 
@@ -509,7 +510,7 @@ B<Arguments:>
 
 Renames a droplet, thus setting the reverse DNS.
 
-More info: L<< https://developers.digitalocean.com/#rename-a-droplet >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#rename-a-droplet >>.
 
 =head2 droplet_snapshot
 
@@ -530,7 +531,7 @@ B<Arguments:>
 
 Saves a snapshopt of the droplet.
 
-More info: L<< https://developers.digitalocean.com/#rebuild-a-droplet >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#rebuild-a-droplet >>.
 
 =head2 droplet_reboot
 
@@ -546,7 +547,7 @@ B<Arguments:>
 
 Reboots droplet.
 
-More info: L<< https://developers.digitalocean.com/#reboot-a-droplet >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#reboot-a-droplet >>.
 
 =head2 droplet_power_cycle
 
@@ -562,7 +563,7 @@ B<Arguments:>
 
 Power cycles droplet.
 
-More info: L<< https://developers.digitalocean.com/#power-cycle-a-droplet >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#power-cycle-a-droplet >>.
 
 =head2 droplet_power_on
 
@@ -578,7 +579,7 @@ B<Arguments:>
 
 Powers on droplet.
 
-More info: L<< https://developers.digitalocean.com/#power-on-a-droplet >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#power-on-a-droplet >>.
 
 =head2 droplet_power_off
 
@@ -594,7 +595,7 @@ B<Arguments:>
 
 Powers off droplet.
 
-More info: L<< https://developers.digitalocean.com/#power-off-a-droplet >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#power-off-a-droplet >>.
 
 =head2 droplet_password_reset
 
@@ -610,7 +611,7 @@ B<Arguments:>
 
 Resets the root password of the droplet.
 
-More info: L<< https://developers.digitalocean.com/#password-reset-a-droplet >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#password-reset-a-droplet >>.
 
 =head2 droplet_shutdown
 
@@ -626,7 +627,7 @@ B<Arguments:>
 
 Shuts down a droplet
 
-More info: L<< https://developers.digitalocean.com/#shutdown-a-droplet >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#shutdown-a-droplet >>.
 
 =head2 droplet_enable_ipv6
 
@@ -642,7 +643,7 @@ B<Arguments:>
 
 Enables IPv6 in a droplet.
 
-More info: L<< https://developers.digitalocean.com/#enable-ipv6 >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#enable-ipv6 >>.
 
 =head2 droplet_enable_private_networking
 
@@ -658,7 +659,7 @@ B<Arguments:>
 
 Enables private networking for a droplet.
 
-More info: L<< https://developers.digitalocean.com/#enable-private-networking >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#enable-private-networking >>.
 
 =head2 droplet_disable_backups
 
@@ -674,7 +675,7 @@ B<Arguments:>
 
 Disables backups for the droplet.
 
-More info: L<< https://developers.digitalocean.com/#disable-backups >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#disable-backups >>.
 
 =head2 droplet_action_get
 
@@ -695,7 +696,7 @@ B<Arguments:>
 
 Retrieve details from a specific action.
 
-More info: L<< https://developers.digitalocean.com/#retrieve-a-droplet-action >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#retrieve-a-droplet-action >>.
 
 =head2 key_create
 
@@ -716,7 +717,7 @@ B<Arguments:>
 
 Creates a new ssh key for this account.
 
-More info: L<< https://developers.digitalocean.com/#create-a-new-key >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#create-a-new-key >>.
 
 =head2 key_delete
 
@@ -734,7 +735,7 @@ B<Arguments:>
 
 Deletes the specified ssh key.
 
-More info: L<< https://developers.digitalocean.com/#destroy-a-key >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#destroy-a-key >>.
 
 =head2 key_get
 
@@ -752,13 +753,13 @@ B<Arguments:>
 
 Retrieves details about a particular ssh key, identified by id or fingerprint (pick one).
 
-More info: L<< https://developers.digitalocean.com/#retrieve-an-existing-key >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-key >>.
 
 =head2 key_list
 
 Retrieves all the keys for this account.
 
-More info: L<< https://developers.digitalocean.com/#list-all-keys >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#list-all-keys >>.
 
 =head2 region_list
 
@@ -772,7 +773,7 @@ More info: L<< https://developers.digitalocean.com/#list-all-keys >>.
 
 Retrieves all the regions available in Digital Ocean.
 
-More info: L<< https://developers.digitalocean.com/#list-all-regions >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#list-all-regions >>.
 
 =head2 size_list
 
@@ -784,7 +785,19 @@ Retrieves all the sizes available in Digital Ocean.
         say "Size $s->{slug} costs $s->{price_hourly} per hour.";
     }
 
-More info: L<< https://developers.digitalocean.com/#list-all-sizes >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#list-all-sizes >>.
+
+=head2 image_list
+
+Retrieves all the images available in Digital Ocean.
+
+    my $images = $do->image_list();
+
+    for my $i (@{ $images->{content} }) {
+        say join "\t", $i->{distribution}, $i->{id}, $i->{name};
+    }
+
+More info: L<< https://developers.digitalocean.com/documentation/v2/#list-all-images >>.
 
 =head1 SEE ALSO
 
@@ -796,7 +809,7 @@ First DigitalOcean module, uses v1 API. It has a more OO
 approach than this module, and might have a more stable interface at the
 moment.
 
-=item L<< https://developers.digitalocean.com >>
+=item L<< https://developers.digitalocean.com/documentation/v2/ >>
 
 Documentation for API v2, in DigitalOcean's website.
 
