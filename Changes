@@ -1,6 +1,8 @@
 Revision history for Perl module WebService::DigitalOcean.
 
 {{$NEXT}}
+
+0.024 2015-08-17T20:03:34Z
     - Create Image role (thanks Evan Staton)
     - Update links to upstream documentation (thanks Evan Staton)
 
