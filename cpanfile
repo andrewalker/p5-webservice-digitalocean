@@ -7,3 +7,7 @@ requires 'Carp';
 requires 'JSON';
 requires 'Type::Tiny';
 requires 'DateTime';
+
+on 'test' => sub {
+    requires 'Test::Fatal';
+};
