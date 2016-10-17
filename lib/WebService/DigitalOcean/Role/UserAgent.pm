@@ -28,6 +28,8 @@ sub _build_ua {
         default_headers => HTTP::Headers->new(@headers),
     );
 
+    $ua->env_proxy;
+
     return $ua;
 }
 
