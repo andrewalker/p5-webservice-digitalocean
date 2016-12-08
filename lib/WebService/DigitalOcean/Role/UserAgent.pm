@@ -98,11 +98,12 @@ sub _get_ratelimit {
 sub _get_content {
     my ($self, $content_type, $content) = @_;
 
-    if (length $content_type && $content_type ne 'application/json') {
+    if ($content_type ne 'application/json') {
 	# Delete method returns 'application/octet-stream' according to the API
         # docs, though it is a blank string here. No need to warn on this
 	# expected behavior.
-	warn "Unexpected Content-Type " . $content_type;
+	warn "Unexpected Content-Type " . $content_type
+	    if length $content_type;
         return {};
     }
     else {
