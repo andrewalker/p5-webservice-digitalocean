@@ -105,28 +105,29 @@ sub _get_content {
 	warn "Unexpected Content-Type " . $content_type;
         return {};
     }
-
-    my $decoded_response = JSON::decode_json( $content );
-
-    if ( !is_HashRef($decoded_response) ) {
-        return { content => $decoded_response };
+    else {
+	my $decoded_response = JSON::decode_json( $content );
+	
+	if ( !is_HashRef($decoded_response) ) {
+	    return { content => $decoded_response };
+	}
+	
+	my $meta  = delete $decoded_response->{meta};
+	my $links = delete $decoded_response->{links};
+	
+	my @values = values %$decoded_response;
+	
+	my $c = scalar @values == 1
+	    ? $values[0]
+	    : $decoded_response
+	    ;
+	
+	return {
+	    meta    => $meta,
+	    links   => $links,
+	    content => $c,
+	};
     }
-
-    my $meta  = delete $decoded_response->{meta};
-    my $links = delete $decoded_response->{links};
-
-    my @values = values %$decoded_response;
-
-    my $c = scalar @values == 1
-          ? $values[0]
-          : $decoded_response
-          ;
-
-    return {
-        meta    => $meta,
-        links   => $links,
-        content => $c,
-    };
 }
 
 1;
