@@ -99,31 +99,37 @@ sub _get_content {
     my ($self, $content_type, $content) = @_;
 
     if ($content_type ne 'application/json') {
-        warn "Unexpected Content-Type " . $content_type;
+        # Delete method returns 'application/octet-stream' according to the API
+        # docs, though it is a blank string here. No need to warn on this
+        # expected behavior.
+        warn "Unexpected Content-Type " . $content_type
+            if length $content_type;
+
         return {};
     }
+    else {
+        my $decoded_response = JSON::decode_json( $content );
 
-    my $decoded_response = JSON::decode_json( $content );
+        if ( !is_HashRef($decoded_response) ) {
+            return { content => $decoded_response };
+        }
 
-    if ( !is_HashRef($decoded_response) ) {
-        return { content => $decoded_response };
+        my $meta  = delete $decoded_response->{meta};
+        my $links = delete $decoded_response->{links};
+
+        my @values = values %$decoded_response;
+
+        my $c = scalar @values == 1
+            ? $values[0]
+            : $decoded_response
+            ;
+
+        return {
+            meta    => $meta,
+            links   => $links,
+            content => $c,
+        };
     }
-
-    my $meta  = delete $decoded_response->{meta};
-    my $links = delete $decoded_response->{links};
-
-    my @values = values %$decoded_response;
-
-    my $c = scalar @values == 1
-          ? $values[0]
-          : $decoded_response
-          ;
-
-    return {
-        meta    => $meta,
-        links   => $links,
-        content => $c,
-    };
 }
 
 1;
