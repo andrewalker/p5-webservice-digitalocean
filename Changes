@@ -1,6 +1,12 @@
 Revision history for Perl module WebService::DigitalOcean.
 
 {{$NEXT}}
+    - Fix warning of unexpected content type when deleting droplet.
+
+0.025 2016-10-17T14:15:06Z
+    - Respect proxies environment settings
+    - Be more explicit about requirements
+    - Clarify comments about fake tokens
 
 0.024 2015-08-17T20:03:34Z
     - Create Image role (thanks Evan Staton)
