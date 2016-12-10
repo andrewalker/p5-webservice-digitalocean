@@ -1,6 +1,8 @@
 Revision history for Perl module WebService::DigitalOcean.
 
 {{$NEXT}}
+
+0.026 2016-12-10T14:29:54Z
     - Fix warning of unexpected content type when deleting droplet.
 
 0.025 2016-10-17T14:15:06Z
