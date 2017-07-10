@@ -18,6 +18,7 @@ sub domain_record_create {
             type     => Str,
             name     => Optional[Str],
             data     => Optional[Str],
+            ttl      => Optional[Int],
             priority => Optional[Int],
             port     => Optional[Int],
             weight   => Optional[Int],
