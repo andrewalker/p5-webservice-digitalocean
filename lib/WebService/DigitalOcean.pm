@@ -1,7 +1,7 @@
 package WebService::DigitalOcean;
 # ABSTRACT: Access the DigitalOcean RESTful API (v2)
 use Moo;
-use Types::Standard qw/Str/;
+use Types::Standard qw/Str Bool/;
 use LWP::UserAgent;
 use JSON ();
 use DateTime;
@@ -30,6 +30,12 @@ has token => (
     is       => 'ro',
     isa      => Str,
     required => 1,
+);
+
+has recursive => (
+    is      => 'ro',
+    isa     => Bool,
+    default => 0,
 );
 
 1;
