@@ -514,7 +514,7 @@ More info: L<< https://developers.digitalocean.com/documentation/v2/#rename-a-dr
 
 =head2 droplet_snapshot
 
-    $do->droplet_rebuild({
+    $do->droplet_snapshot({
         droplet => 123456,
         name    => 'snapshot-name',
     });
@@ -531,7 +531,7 @@ B<Arguments:>
 
 Saves a snapshopt of the droplet.
 
-More info: L<< https://developers.digitalocean.com/documentation/v2/#rebuild-a-droplet >>.
+More info: L<< https://developers.digitalocean.com/documentation/v2/#snapshot-a-droplet >>.
 
 =head2 droplet_reboot
 
