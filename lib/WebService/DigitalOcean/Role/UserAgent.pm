@@ -36,7 +36,7 @@ sub _build_ua {
 sub _build_request {
     my ( $self, $method, $uri, $data ) = @_;
 
-    my $full_url     = $self->api_base_url . $uri;
+    my $full_url     = $uri =~ /^http/ ? $uri : $self->api_base_url . $uri;
     my $encoded_data = $data ? JSON::encode_json($data) : undef;
     my $headers      = undef;
 
@@ -71,6 +71,27 @@ sub make_request {
         my $ct = $response->content_type,
         my $dc = $response->decoded_content,
     );
+
+    if ($self->recursive) {
+        $result->{request_objects} = [ $result->{request_object}, ];
+        $result->{response_objects} = [ $result->{response_object}, ];
+        $result->{status_lines} = [ $result->{status_line}, ];
+
+        if ($content->{links}->{pages}->{next}) {
+            my $next_response = $self->make_request( $method, $content->{links}->{pages}->{next}, $data );
+
+            $result->{is_success} &&= $next_response->{is_success};
+            $ratelimit = { ratelimit => $next_response->{ratelimit}, };
+
+            push @{ $content->{content} }, @{ $next_response->{content} };
+
+            push @{ $result->{request_objects} }, @{ $next_response->{request_objects} };
+            push @{ $result->{response_objects} }, @{ $next_response->{response_objects} };
+            push @{ $result->{status_lines} }, @{ $next_response->{status_lines} };
+
+            delete $content->{links}->{pages}->{next};
+        }
+    }
 
     return { %$result, %$ratelimit, %$content };
 }
