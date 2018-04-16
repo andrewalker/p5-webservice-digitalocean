@@ -20,6 +20,7 @@ sub droplet_create {
             image              => Str,
             user_data          => Optional[ Str ],
             ssh_keys           => Optional[ ArrayRef ],
+            tags               => Optional[ ArrayRef ],
             backups            => Optional[ Bool ],
             ipv6               => Optional[ Bool ],
             private_networking => Optional[ Bool ],
